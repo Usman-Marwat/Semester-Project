@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, TouchableWithoutFeedback, Image } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -8,7 +8,12 @@ import styles from "./taskInfoStyle";
 import appTheme from "../constants/colors";
 import { AuthContext } from "../context";
 
-export function TaskInfo({ task }) {
+export function TaskInfo({
+  task,
+  navigation,
+  modalVisible2,
+  setmodalVisible2,
+}) {
   //   const { state, dispatch } = useContext(AuthContext);
 
   const handleBottomModal = () => {
@@ -24,7 +29,7 @@ export function TaskInfo({ task }) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => handleBottomModal()}>
+    <TouchableWithoutFeedback onPress={() => setmodalVisible2(!modalVisible2)}>
       <View style={styles.container}>
         <AntDesign
           name="checksquareo"

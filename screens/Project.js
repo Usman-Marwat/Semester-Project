@@ -18,6 +18,7 @@ import { TaskInfo } from "../components/TaskInfo";
 import { combineData } from "../utils/DataHelper";
 import { AuthContext } from "../context";
 import appTheme from "../constants/colors";
+import { TaskView } from "./TaskView";
 
 import { CreateTask } from "../components/CreateTask";
 
@@ -51,6 +52,7 @@ export function Project({ navigation, route }) {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
 
   const tasks = [
     {
@@ -439,7 +441,13 @@ export function Project({ navigation, route }) {
                 <ScrollView showsVerticalScrollIndicator={false}>
                   <View style={styles.bottomContent}>
                     {getTasks()?.map((task) => (
-                      <TaskInfo task={task} key={Math.random().toString()} />
+                      <TaskInfo
+                        task={task}
+                        key={Math.random().toString()}
+                        navigation={navigation}
+                        modalVisible={modalVisible2}
+                        setModalVisible={setModalVisible2}
+                      />
                     ))}
                   </View>
                 </ScrollView>
@@ -453,6 +461,10 @@ export function Project({ navigation, route }) {
       <CreateTask
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
+      />
+      <TaskView
+        modalVisible={modalVisible2}
+        setModalVisible={setModalVisible2}
       />
     </SafeAreaView>
   );
