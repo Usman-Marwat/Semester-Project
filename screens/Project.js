@@ -462,10 +462,6 @@ export function Project({ navigation, route }) {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
       />
-      <TaskView
-        modalVisible={modalVisible2}
-        setModalVisible={setModalVisible2}
-      />
     </SafeAreaView>
   );
 }

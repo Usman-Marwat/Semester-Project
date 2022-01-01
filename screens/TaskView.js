@@ -16,8 +16,9 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import AntDesign from "react-native-vector-icons/AntDesign";
 import styles2 from "./taskViewStyle";
 import appTheme from "../constants/colors";
+import { NavigationContainer } from "@react-navigation/native";
 
-export function TaskView({ modalVisible2, setmodalVisible2 }) {
+export function TaskView({ navigation }) {
   const selectedTask = {
     id: 1,
     projectId: 1,
@@ -43,11 +44,11 @@ export function TaskView({ modalVisible2, setmodalVisible2 }) {
   };
 
   return (
-    <Modal animationType="slide" transparent={true} visible={modalVisible2}>
+    <Modal animationType="slide" transparent={true} visible={true}>
       <SafeAreaView style={styles.modalContainer}>
         <TouchableOpacity
           style={styles.closeButton}
-          onPress={() => setmodalVisible2(!modalVisible2)}
+          onPress={() => navigation.navigate("Project")}
         ></TouchableOpacity>
         <View style={styles.setModalDimensions("70%", "100%")}>
           <View style={styles2.container}>

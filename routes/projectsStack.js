@@ -2,6 +2,7 @@ import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Projects } from "../screens/Projects";
 import { Project } from "../screens/Project";
+import { TaskView } from "../screens/TaskView";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,16 @@ function ProjectsStack() {
       <Stack.Screen
         name="Project"
         component={Project}
+        options={{
+          headerStyle: {
+            backgroundColor: "steelblue",
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="TaskView"
+        component={TaskView}
         options={{
           headerStyle: {
             backgroundColor: "steelblue",

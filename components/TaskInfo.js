@@ -29,7 +29,7 @@ export function TaskInfo({
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => setmodalVisible2(!modalVisible2)}>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate("TaskView")}>
       <View style={styles.container}>
         <AntDesign
           name="checksquareo"
