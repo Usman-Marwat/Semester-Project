@@ -14,7 +14,7 @@ import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import styles from "./profileStyle";
 import appTheme from "../constants/colors";
 import { AuthContext } from "../context";
-import { TabScreenHeader } from "./TabScreenHeader";
+import { TabScreenHeader } from "../components/TabScreenHeader";
 // import { navigateToNestedRoute } from "../../navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";
 

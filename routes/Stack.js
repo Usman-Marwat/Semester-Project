@@ -9,8 +9,13 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Login } from "../screens/Login";
 import { SignUp } from "../screens/SignUp";
 import { Profile } from "../screens/Profile";
+import { Onboarding } from "../screens/Onboarding";
+import { Projects } from "../screens/Projects";
+import { Dashboard } from "../screens/Dashboard";
+import { Members } from "../screens/Members";
+import { Project } from "../screens/Project";
 import appTheme from "../constants/colors";
-// import { combineData } from "../utils/DataHelper";
+import { combineData } from "../utils/DataHelper";
 // import { AuthContext } from "../context";
 
 const Stack = createNativeStackNavigator();
@@ -91,9 +96,9 @@ const SingleStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Onboarding"
-        component={Profile}
-        options={{ headerShown: false }}
+        name="Project"
+        component={Projects}
+        // options={{ headerShown: false }}
       />
       {/* <Stack.Screen
         name="Login"
