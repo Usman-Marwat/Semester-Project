@@ -21,12 +21,14 @@ const styles = StyleSheet.create({
     fontSize: 26,
     lineHeight: 32,
     marginBottom: 15,
+    textAlign: "center",
   },
   smallText: {
     fontSize: 16,
     color: appTheme.INACTIVE_COLOR,
     fontWeight: "500",
-    marginBottom: "auto",
+    marginBottom: 50,
+    textAlign: "center",
   },
   loginBtnWrapper: {
     borderColor: appTheme.INACTIVE_COLOR,
@@ -39,7 +41,12 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     marginBottom: 15,
   },
-  loginBtnText: { fontWeight: "bold", fontSize: 16 },
+  loginBtnText: {
+    fontWeight: "bold",
+    fontSize: 16,
+    borderColor: appTheme.INACTIVE_COLOR,
+    // borderBottomWidth: 1,
+  },
   signUpBtnWrapper: {
     backgroundColor: appTheme.PRIMARY_COLOR,
     display: "flex",

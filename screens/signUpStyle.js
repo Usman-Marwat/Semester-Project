@@ -76,6 +76,15 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   signUpBtnText: { fontWeight: "bold", fontSize: 16, color: "#fff" },
+  indexBtnWrapper: {
+    borderColor: appTheme.INACTIVE_COLOR,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 45,
+    marginTop: 20,
+  },
 });
 
 export default styles;

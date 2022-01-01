@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   Switch,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { MaterialIcons, Ionicons, Octicons } from "@expo/vector-icons";
 import styles from "./loginStyle";
@@ -36,7 +37,7 @@ export function Login({ navigation }) {
       <View style={styles.bodyContent}>
         <Text style={styles.largeText}>Welcome Back!</Text>
         <Text style={styles.smallText}>
-          Log into your account &amp; manage {"\n"}your tasks
+          Log into your account &amp; make {"\n"}a successful company
         </Text>
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" size={20} color="gray" />
@@ -72,11 +73,17 @@ export function Login({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.signUpBtnWrapper}
-          onPress={() => handleNavigation("SignUp")}
+          onPress={() => navigation.navigate("SignUp")}
         >
           <Text style={styles.signUpBtnText}>
             Don't have an account? SIGN UP
           </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.indexBtnWrapper}
+          onPress={() => navigation.navigate("Onboarding")}
+        >
+          <Text>Home?</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

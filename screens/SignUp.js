@@ -15,14 +15,11 @@ import styles from "./signUpStyle";
 // import { navigateToNestedRoute } from "../shared/navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";
 import appTheme from "../constants/colors";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export function SignUp({ navigation }) {
   const handleBackButton = () => {
     navigation?.goBack();
-  };
-
-  const handleNavigation = (screen, params) => {
-    navigateToNestedRoute(getScreenParent(screen), screen, params);
   };
 
   return (
@@ -39,7 +36,7 @@ export function SignUp({ navigation }) {
       <View style={styles.bodyContent}>
         <Text style={styles.largeText}>Welcome Back!</Text>
         <Text style={styles.smallText}>
-          Log into your account &amp; manage {"\n"}your tasks
+          Log into your account &amp; make {"\n"}a successful company
         </Text>
         <View style={styles.inputRow}>
           <Ionicons name="person-outline" size={20} color="gray" />
@@ -84,12 +81,18 @@ export function SignUp({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.loginBtnWrapper}
-          onPress={() => handleNavigation("Login")}
+          onPress={() => navigation.navigate("Login")}
         >
           <Text style={styles.loginBtnText}>
             Already have an account? LOGIN
           </Text>
         </TouchableOpacity>
+        <TouchableWithoutFeedback
+          style={styles.indexBtnWrapper}
+          onPress={() => navigation.navigate("Onboarding")}
+        >
+          <Text>Home?</Text>
+        </TouchableWithoutFeedback>
       </View>
     </SafeAreaView>
   );
