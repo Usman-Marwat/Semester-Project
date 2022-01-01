@@ -269,7 +269,7 @@ export function Dashboard() {
 
   return (
     <SafeAreaView>
-      <TabScreenHeader
+      {/* <TabScreenHeader
         leftComponent={() => (
           <View style={styles.flexRow}>
             <Text style={styles.headerLeftText}>{formatCurrentDate()}</Text>
@@ -282,10 +282,10 @@ export function Dashboard() {
         )}
         isSearchBtnVisible={true}
         isMoreBtnVisible={true}
-      />
+      /> */}
       <View style={styles.contentBody}>
         <View style={styles.statisticsSection}>
-          <Text style={styles.contentTitle}>Today</Text>
+          <Text style={styles.contentTitle}>Recent</Text>
           <View style={styles.statisticsContainer}>
             <View
               style={[

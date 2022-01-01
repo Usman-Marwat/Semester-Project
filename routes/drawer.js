@@ -9,6 +9,7 @@ import AboutStack from "./aboutStack";
 import AppStack from "./Stack";
 import RequestsStack from "./requestsStack";
 import ProfileStack from "./profileStack";
+import MyTab from "./tab";
 
 const RootDrawer = createDrawerNavigator();
 
@@ -26,6 +27,7 @@ function Navigator() {
         <RootDrawer.Screen name="RequestsStack" component={RequestsStack} />
         <RootDrawer.Screen name="ProfileStack" component={ProfileStack} />
         <RootDrawer.Screen name="App-Stack" component={AppStack} />
+        <RootDrawer.Screen name="MyTab" component={MyTab} />
       </RootDrawer.Navigator>
     </NavigationContainer>
   );

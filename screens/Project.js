@@ -309,15 +309,8 @@ export function Project({ navigation, route }) {
   };
 
   const handleCreateTask = () => {
-    console.log("hi");
-    // dispatch({
-    //   type: "toggleBottomModal",
-    //   payload: { bottomModal: "CreateTask" },
-    // });
     setModalVisible(!modalVisible);
   };
-
-  const handleChangeTaskStatus = (value) => {};
 
   return (
     <SafeAreaView style={styles.container}>

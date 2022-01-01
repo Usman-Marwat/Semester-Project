@@ -10,14 +10,10 @@ import appTheme from "../constants/colors";
 import { getScreenParent } from "../utils/NavigationHelper";
 
 export function ProjectCard({ project, navigation }) {
-  const handleNavigation = (screen, params) => {
-    navigateToNestedRoute(getScreenParent(screen), screen, params);
-  };
-
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => handleNavigation("Project", project)}
+      onPress={() => navigation.navigate("Project")}
     >
       <Text style={styles.projectTitle}>{project?.title}</Text>
       <View style={styles.projectTeamAndProgress}>

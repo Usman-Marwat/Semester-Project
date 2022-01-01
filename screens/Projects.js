@@ -174,7 +174,6 @@ export function Projects({ navigation }) {
             data={getProjects()}
             keyExtractor={(item, index) => Math.random().toString()}
             renderItem={renderProjectInfo}
-            horizontal={false}
             showsVerticalScrollIndicator={false}
           />
         ) : (
