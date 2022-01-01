@@ -17,7 +17,7 @@ import { AuthContext } from "../context";
 // import { navigateToNestedRoute } from "../../navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";
 
-export function Members() {
+export default function Members() {
   //   const { state, dispatch } = useContext(AuthContext);
   //   const { members } = state;
 
@@ -126,11 +126,6 @@ export function Members() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TabScreenHeader
-        leftComponent={() => <Text style={styles.headerTitle}>Members</Text>}
-        isSearchBtnVisible={false}
-        isMoreBtnVisible={true}
-      />
       {members?.length ? (
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.membersWrapper}>

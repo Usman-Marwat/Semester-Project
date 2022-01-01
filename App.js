@@ -21,7 +21,7 @@ export default function App() {
   if (!loaded) {
     return null;
   } else {
-    if (!isLogged)
+    if (isLogged)
       return (
         <PaperProvider>
           <StartNavigator />

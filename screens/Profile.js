@@ -39,20 +39,6 @@ export function Profile({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TabScreenHeader
-        leftComponent={() => (
-          <View style={styles.leftHeaderWrapper}>
-            <TouchableOpacity
-              onPress={() => handleBackButton("Members")}
-              style={styles.backButton}
-            >
-              <Ionicons name="arrow-back-outline" size={25} color="#000" />
-            </TouchableOpacity>
-            <Text style={styles.headerTitle}>Profile</Text>
-          </View>
-        )}
-        isSearchBtnVisible={true}
-      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <View style={styles.profileDetailsSection}>
