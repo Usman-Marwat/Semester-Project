@@ -17,10 +17,12 @@ import { AuthContext } from "../context";
 import { TabScreenHeader } from "../components/TabScreenHeader";
 // import { navigateToNestedRoute } from "../../navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useLog, useSetIsLog } from "../context/LogContext";
 
 export function Profile({ navigation }) {
-  // const { state, dispatch } = useContext(AuthContext);
-  // const { user } = state;
+  isLogged = useLog();
+  setIsLogged = useSetIsLog();
   const user = {
     id: "0123V",
     name: "Usman Marwat",
@@ -35,6 +37,15 @@ export function Profile({ navigation }) {
 
   const handleNavigation = (screen, params) => {
     navigateToNestedRoute(getScreenParent(screen), screen, params);
+  };
+
+  const clearAsyncStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      setIsLogged(false);
+    } catch (e) {
+      // clear error
+    }
   };
 
   return (
@@ -102,7 +113,7 @@ export function Profile({ navigation }) {
                   styles.singleExplore,
                   { marginRight: "auto", marginLeft: "7%" },
                 ]}
-                onPress={() => handleNavigation("Onboarding")}
+                onPress={() => clearAsyncStorage()}
               >
                 <MaterialCommunityIcons
                   name="logout"

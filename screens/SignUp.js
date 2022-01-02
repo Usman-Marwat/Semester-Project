@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TextInput,
   Switch,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MaterialIcons } from "@expo/vector-icons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Octicons from "react-native-vector-icons/Octicons";
@@ -17,9 +18,25 @@ import { getScreenParent } from "../utils/NavigationHelper";
 import appTheme from "../constants/colors";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
+import { useLog, useSetIsLog } from "../context/LogContext";
+
 export function SignUp({ navigation }) {
+  const setIsLogged = useSetIsLog();
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const handleBackButton = () => {
     navigation?.goBack();
+  };
+
+  const saveDataToAsync = async () => {
+    console.log("Saving-------------------");
+    await AsyncStorage.setItem(
+      "@user_me",
+      JSON.stringify({ username, password, email })
+    );
+    setIsLogged(true);
+    console.log("Saving Done!");
   };
 
   return (
@@ -44,6 +61,10 @@ export function SignUp({ navigation }) {
             placeholder="Username"
             placeholderTextColor="gray"
             style={styles.textInput}
+            value={username}
+            onChangeText={(text) => {
+              setUserName(text);
+            }}
           />
         </View>
         <View style={styles.inputRow}>
@@ -53,6 +74,10 @@ export function SignUp({ navigation }) {
             placeholderTextColor="gray"
             secureTextEntry={true}
             style={styles.textInput}
+            value={email}
+            onChangeText={(text) => {
+              setEmail(text);
+            }}
           />
         </View>
         <View style={styles.inputRow}>
@@ -62,6 +87,10 @@ export function SignUp({ navigation }) {
             placeholderTextColor="gray"
             secureTextEntry={true}
             style={styles.textInput}
+            value={password}
+            onChangeText={(text) => {
+              setPassword(text);
+            }}
           />
           <Octicons name="eye-closed" size={20} color="gray" />
         </View>
@@ -76,7 +105,10 @@ export function SignUp({ navigation }) {
             value={true}
           />
         </View>
-        <TouchableOpacity style={styles.signUpBtnWrapper}>
+        <TouchableOpacity
+          style={styles.signUpBtnWrapper}
+          onPress={saveDataToAsync}
+        >
           <Text style={styles.signUpBtnText}>SIGN UP</Text>
         </TouchableOpacity>
         <TouchableOpacity

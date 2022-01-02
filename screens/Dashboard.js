@@ -285,7 +285,7 @@ export function Dashboard() {
       /> */}
       <View style={styles.contentBody}>
         <View style={styles.statisticsSection}>
-          <Text style={styles.contentTitle}>Recent</Text>
+          <Text style={styles.contentTitle}>All Contracts</Text>
           <View style={styles.statisticsContainer}>
             <View
               style={[

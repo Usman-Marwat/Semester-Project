@@ -17,6 +17,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import styles2 from "./taskViewStyle";
 import appTheme from "../constants/colors";
 import { NavigationContainer } from "@react-navigation/native";
+import Calender from "../components/Calender";
 
 export function TaskView({ navigation }) {
   const selectedTask = {
@@ -110,27 +111,11 @@ export function TaskView({ navigation }) {
               their default model text, and a search for 'lorem ipsum' will
               uncover many web sites still in their infancy.
             </Text>
-            <View style={styles2.bottomWrapper}>
-              <TouchableOpacity style={styles2.bottomContent}>
-                <EvilIcons
-                  name="comment"
-                  size={25}
-                  color={appTheme.INACTIVE_COLOR}
-                />
-                <Text style={styles2.bottomText}>3 comments</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles2.bottomContent}>
-                <Ionicons
-                  name="attach"
-                  size={25}
-                  color={appTheme.INACTIVE_COLOR}
-                />
-                <Text style={styles2.bottomText}>2 attachments</Text>
-              </TouchableOpacity>
-            </View>
+            <View style={styles2.bottomWrapper}></View>
           </View>
         </View>
       </SafeAreaView>
+      <Calender />
     </Modal>
   );
 }
