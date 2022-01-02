@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -19,6 +19,7 @@ import { TabScreenHeader } from "../components/TabScreenHeader";
 import { getScreenParent } from "../utils/NavigationHelper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLog, useSetIsLog } from "../context/LogContext";
+import UpdateProfile from "../components/UpdateProfile";
 
 export function Profile({ navigation }) {
   isLogged = useLog();
@@ -30,6 +31,7 @@ export function Profile({ navigation }) {
       "https://images.unsplash.com/photo-1609010697446-11f2155278f0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
     designation: "Lead Designer",
   };
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleBackButton = () => {
     navigation?.goBack();
@@ -72,7 +74,10 @@ export function Profile({ navigation }) {
             <View style={styles.profileCenterSection}>
               <Text style={styles.nameText}>{user?.name}</Text>
               <Text style={styles.designationText}>{user?.designation}</Text>
-              <TouchableOpacity style={styles.editProfileWrapper}>
+              <TouchableOpacity
+                onPress={() => setModalVisible(!modalVisible)}
+                style={styles.editProfileWrapper}
+              >
                 <Text style={styles.editProfileText}>Edit Profile</Text>
               </TouchableOpacity>
             </View>
@@ -126,6 +131,10 @@ export function Profile({ navigation }) {
           </View>
         </View>
       </ScrollView>
+      <UpdateProfile
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </SafeAreaView>
   );
 }

@@ -52,7 +52,6 @@ export function Project({ navigation, route }) {
   };
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalVisible2, setModalVisible2] = useState(false);
 
   const tasks = [
     {
@@ -445,8 +444,6 @@ export function Project({ navigation, route }) {
                         task={task}
                         key={Math.random().toString()}
                         navigation={navigation}
-                        modalVisible={modalVisible2}
-                        setModalVisible={setModalVisible2}
                       />
                     ))}
                   </View>

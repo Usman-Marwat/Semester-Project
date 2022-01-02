@@ -8,12 +8,7 @@ import styles from "./taskInfoStyle";
 import appTheme from "../constants/colors";
 import { AuthContext } from "../context";
 
-export function TaskInfo({
-  task,
-  navigation,
-  modalVisible2,
-  setmodalVisible2,
-}) {
+export function TaskInfo({ task, navigation }) {
   //   const { state, dispatch } = useContext(AuthContext);
 
   const handleBottomModal = () => {
