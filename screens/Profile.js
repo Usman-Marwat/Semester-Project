@@ -89,13 +89,16 @@ export function Profile({ navigation }) {
                 <Ionicons name="people" size={22} color={appTheme.COLOR1} />
                 <Text style={styles.exploreText}>Members</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.singleExplore}>
+              <TouchableOpacity
+                style={styles.singleExplore}
+                onPress={() => navigation.navigate("Todos")}
+              >
                 <MaterialCommunityIcons
                   name="crown"
                   size={22}
                   color={appTheme.COLOR1}
                 />
-                <Text style={styles.exploreText}>Go Pro</Text>
+                <Text style={styles.exploreText}>My-Todos</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.singleExplore}>
                 <Fontisto

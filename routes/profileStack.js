@@ -1,6 +1,7 @@
 import * as React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Profile } from "../screens/Profile";
+import Todos from "../screens/Todos";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,16 @@ function ProfileStack() {
       <Stack.Screen
         name="Profile"
         component={Profile}
+        options={{
+          headerStyle: {
+            backgroundColor: "steelblue",
+          },
+          headerTintColor: "#fff",
+        }}
+      />
+      <Stack.Screen
+        name="Todos"
+        component={Todos}
         options={{
           headerStyle: {
             backgroundColor: "steelblue",
