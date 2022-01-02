@@ -56,3 +56,19 @@ export const updateData = () => {
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
 };
+
+//---------------------------------------------------------
+
+export const addUser = () => {
+  var requestOptions = {
+    method: "POST",
+    body: JSON.stringify({
+      employeename: "New Employee",
+      taskdesc: "New Task",
+    }),
+  };
+  fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+};

@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import appTheme from "../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -44,6 +45,17 @@ const styles = StyleSheet.create({
   chatWrapper: {
     flex: 1,
     position: "relative",
+  },
+  plusBtnContainer: {
+    backgroundColor: appTheme.COLOR1,
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+    marginLeft: -10,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

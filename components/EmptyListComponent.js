@@ -7,7 +7,7 @@ export function EmptyListComponent() {
   return (
     <View style={styles.emptyListContainer}>
       <MaterialCommunityIcons name="file" size={80} color={appTheme.COLOR1} />
-      <Text style={styles.emptyListText}>None found</Text>
+      <Text style={styles.emptyListText}>None found Yet</Text>
     </View>
   );
 }
