@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, TextInput, Button } from "react-native";
 
-export default function AddTodo({ submitHandler }) {
+export default function AddTodo({
+  submitHandler,
+  toggleBtns,
+  setToggleBtns,
+  updateHandler,
+  updateText,
+  UpdateCurrent,
+}) {
   const [text, setText] = useState("");
 
+  useEffect(() => {
+    setText(updateText);
+    console.log(text + "-----------");
+  }, [updateText]);
   const changeHandler = (val) => {
     setText(val);
   };
@@ -16,11 +27,20 @@ export default function AddTodo({ submitHandler }) {
         onChangeText={changeHandler}
         value={text}
       />
-      <Button
-        color="steelblue"
-        onPress={() => submitHandler(text)}
-        title="add todo"
-      />
+      {!toggleBtns && (
+        <Button
+          color="steelblue"
+          onPress={() => submitHandler(text)}
+          title="add todo"
+        />
+      )}
+      {toggleBtns && (
+        <Button
+          color="steelblue"
+          onPress={() => UpdateCurrent(text)}
+          title="Update"
+        />
+      )}
     </View>
   );
 }

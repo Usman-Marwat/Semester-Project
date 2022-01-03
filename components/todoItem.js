@@ -2,14 +2,23 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function TodoItem({ pressHandler, item }) {
+export default function TodoItem({
+  updateHandler,
+  pressHandler,
+  item,
+  toggleBtns,
+  setToggleBtns,
+}) {
   return (
-    <TouchableOpacity onPress={() => pressHandler(item.key)}>
-      <View style={styles.item}>
+    <View style={styles.item}>
+      <TouchableOpacity onPress={() => updateHandler(item.key)}>
+        <MaterialIcons name="update" size={24} color="black" />
+      </TouchableOpacity>
+      <Text style={styles.itemText}>{item.text}</Text>
+      <TouchableOpacity onPress={() => pressHandler(item.key)}>
         <MaterialIcons name="delete" size={24} color="black" />
-        <Text style={styles.itemText}>{item.text}</Text>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -23,9 +32,11 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     borderRadius: 10,
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   itemText: {
-    marginLeft: 10,
+    marginLeft: 20,
     marginTop: 3.5,
   },
 });
