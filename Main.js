@@ -14,7 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // export const LogContext = React.createContext();
 import { useLog, useSetIsLog } from "./context/LogContext";
 
-export default function Main({ pass }) {
+export default function Main() {
   const [loaded] = useFonts({
     "nunito-Bold": require("./assets/fonts/Nunito-Bold.ttf"),
     "nunito-Regular": require("./assets/fonts/Nunito-Regular.ttf"),
@@ -35,9 +35,6 @@ export default function Main({ pass }) {
     } else {
       console.log(":nothing");
     }
-    // console.log(`Username: ${parsed.username}`);
-    // console.log(`Password: ${parsed.password}`);
-    // console.log("Loading Done!");
   };
 
   useEffect(() => {
@@ -49,9 +46,8 @@ export default function Main({ pass }) {
       }
     };
     // clearAll();
-    console.log(isLogged);
-    console.log(setIsLogged);
-    console.log(pass);
+    // console.log(isLogged);
+    // console.log(setIsLogged);
     loadDataFromAsync();
   }, []);
 

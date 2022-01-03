@@ -22,13 +22,7 @@ export const getData = async () => {
   const data = await response.json();
   console.log(data);
 };
-export const GetId = async () => {
-  const response = await fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`);
-  const data = await response.json();
-  const ids = Object.keys(data);
-  console.log(ids);
-};
-GetId();
+
 export const deleteData = () => {
   const id = "-Ms4xZVlgv5Fw-QWlOpv";
   var requestOptions = {
@@ -59,16 +53,31 @@ export const updateData = () => {
 
 //---------------------------------------------------------
 
-export const addUser = () => {
+export const GetId = async () => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`);
+  const data = await response.json();
+  const ids = Object.keys(data);
+  console.log(ids);
+};
+
+export const addMember = (id, name, portfolio_url, image) => {
   var requestOptions = {
     method: "POST",
     body: JSON.stringify({
-      employeename: "New Employee",
-      taskdesc: "New Task",
+      id,
+      name,
+      portfolio_url,
+      image,
     }),
   };
-  fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`, requestOptions)
+  fetch(`${FIREBASE_API_ENDPOINT}/members.json`, requestOptions)
     .then((response) => response.json())
     .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
+};
+
+export const getMembers = async () => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/members.json`);
+  const data = await response.json();
+  return data;
 };
