@@ -1,3 +1,4 @@
+//the similar properties in data will be replaced by that of params
 export const combineData = (data, params) => {
   const obj = {};
   for (const property in params) {

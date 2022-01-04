@@ -17,10 +17,6 @@ import { combineData } from "../utils/DataHelper";
 
 export function Projects({ navigation }) {
   const tabs = ["All", "Ongoing", "Completed"];
-
-  //   const { state, dispatch } = useContext(AuthContext);
-  //   const { projects } = state;
-
   const projects = [
     {
       id: 1,

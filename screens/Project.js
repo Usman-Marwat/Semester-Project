@@ -274,6 +274,7 @@ export function Project({ navigation, route }) {
   const [data, setData] = useState({
     activeTab: "Task List",
   });
+  //the states below are used for dropdown picker
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);

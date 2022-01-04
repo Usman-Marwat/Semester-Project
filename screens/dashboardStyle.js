@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 30,
+    marginBottom: 10,
   },
   statisticsContainer: {
     display: "flex",
@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 30,
   },
-  tasksHeader: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
+  // tasksHeader: {
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   marginBottom: 20,
+  // },
   tasksRow: {
     display: "flex",
     flexDirection: "row",
