@@ -11,12 +11,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  headerLeftText: {
-    color: "#000",
-    marginRight: 5,
-    fontWeight: "bold",
-    fontSize: 15,
-  },
   statisticsSection: {
     paddingTop: 20,
     backgroundColor: "#fff",
@@ -88,16 +82,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 15,
   },
-  plusBtnContainer: {
-    backgroundColor: appTheme.COLOR1,
-    height: 25,
-    width: 25,
-    borderRadius: 50,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // plusBtnContainer: {
+  //   backgroundColor: appTheme.COLOR1,
+  //   height: 25,
+  //   width: 25,
+  //   borderRadius: 50,
+  //   display: "flex",
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
   tasksRightText: {
     marginRight: 7,
     fontWeight: "bold",
@@ -105,7 +99,8 @@ const styles = StyleSheet.create({
     color: appTheme.INACTIVE_COLOR,
   },
   tasksBody: {
-    height: 220,
+    height: 300,
+    // flex: 1,
   },
   tasksList: {
     marginBottom: 50,

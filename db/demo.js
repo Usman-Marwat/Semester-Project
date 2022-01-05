@@ -81,3 +81,45 @@ export const getMembers = async () => {
   const data = await response.json();
   return data;
 };
+
+export const addProject = () => {
+  var requestOptions = {
+    method: "POST",
+    body: JSON.stringify({
+      id: 4,
+      title: "CDA Contract",
+      description: "Canal Building Setup",
+      team: [
+        {
+          name: "Usman Khan",
+          photo:
+            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+        },
+        {
+          name: "Umar Ayub",
+          photo:
+            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+        },
+        {
+          name: "Ali Ahmad",
+          photo:
+            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+        },
+      ],
+      progress: 50,
+      createdAt: "Feb 25 2021",
+      tasks: 20,
+      status: "ongoing",
+    }),
+  };
+  fetch(`${FIREBASE_API_ENDPOINT}/projects.json`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+};
+
+export const getProjectsDb = async () => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/projects.json`);
+  const data = await response.json();
+  return data;
+};

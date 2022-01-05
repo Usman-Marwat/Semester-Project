@@ -14,7 +14,7 @@ function MyTabs() {
     <BottomTab.Navigator
       activeColor="#f0edf6"
       inactiveColor="#3e2465"
-      barStyle={{ backgroundColor: "#694fad" }}
+      barStyle={{ backgroundColor: "coral" }}
     >
       <BottomTab.Screen name="Dashboard" component={Dashboard} options={{}} />
       <BottomTab.Screen name="ProjectsS" component={ProjectsStack} />

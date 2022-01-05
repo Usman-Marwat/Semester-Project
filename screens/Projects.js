@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,90 +14,33 @@ import { TabScreenHeader } from "../components/TabScreenHeader";
 import { ProjectCard } from "../components/ProjectCard";
 import { EmptyListComponent } from "../components/EmptyListComponent";
 import { combineData } from "../utils/DataHelper";
+import { getProjectsDb } from "../db/demo";
 
 export function Projects({ navigation }) {
-  const tabs = ["All", "Ongoing", "Completed"];
-  const projects = [
-    {
-      id: 1,
-      title: "App Project",
-      description: "Digital Product Design",
-      team: [
-        {
-          name: "John Doe",
-          photo:
-            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-        },
-        {
-          name: "Ann Smith",
-          photo:
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-      ],
-      progress: 35,
-      createdAt: "Jan 13 2021",
-      tasks: 24,
-      status: "ongoing",
-    },
-    {
-      id: 2,
-      title: "Dashboard UI",
-      description: "Digital Product Design",
-      team: [
-        {
-          name: "John Doe",
-          photo:
-            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-        },
-        {
-          name: "Ann Smith",
-          photo:
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-      ],
-      progress: 28,
-      createdAt: "Jan 17 2021",
-      tasks: 24,
-      status: "completed",
-    },
-    {
-      id: 3,
-      title: "App UX Planning",
-      description: "Digital Product Design",
-      team: [
-        {
-          name: "John Doe",
-          photo:
-            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-        },
-        {
-          name: "Ann Smith",
-          photo:
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-      ],
-      progress: 35,
-      createdAt: "Feb 25 2021",
-      tasks: 24,
-      status: "ongoing",
-    },
-  ];
+  const [projects, setProjects] = useState([]);
 
+  const getData = async () => {
+    try {
+      let projectsDb = await getProjectsDb();
+      let projectsDbArray = [];
+      for (let projectDb in projectsDb) {
+        if (!projectsDb.hasOwnProperty(projectDb)) {
+          continue;
+        }
+        projectsDbArray.push(projectsDb[projectDb]);
+      }
+      setProjects(projectsDbArray);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const tabs = ["All", "Ongoing", "Completed"];
+
+  //data can have more than active tab
   const [data, setData] = useState({ activeTab: "All" });
 
   const toggleTab = (tab) => {

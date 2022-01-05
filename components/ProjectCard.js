@@ -13,7 +13,7 @@ export function ProjectCard({ project, navigation }) {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate("Project")}
+      onPress={() => navigation.navigate("Project", { ProjectId: project.id })}
     >
       <Text style={styles.projectTitle}>{project?.title}</Text>
       <View style={styles.projectTeamAndProgress}>

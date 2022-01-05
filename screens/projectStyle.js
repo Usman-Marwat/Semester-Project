@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   projectDetailsSection: {
-    paddingTop: 40,
+    paddingTop: 10,
     backgroundColor: "#fff",
     paddingHorizontal: 16,
     borderBottomStartRadius: 30,
@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 1,
     elevation: 1,
-    marginBottom: 15,
+    marginBottom: 0,
   },
   projectTitleWrapper: {
-    marginBottom: 5,
+    marginBottom: 20,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   projectTeamTitle: { fontWeight: "bold", marginBottom: 5 },
   projectDescription: {
     color: appTheme.INACTIVE_COLOR,
-    marginBottom: 30,
+    marginBottom: 10,
   },
   projectProgressWrapper: { marginRight: 30 },
   projectProgress: {
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 10,
-    marginTop: 5,
+    marginBottom: 5,
+    marginTop: 0,
   },
   tasksRow: {
     display: "flex",
