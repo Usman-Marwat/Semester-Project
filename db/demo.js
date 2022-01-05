@@ -123,3 +123,17 @@ export const getProjectsDb = async () => {
   const data = await response.json();
   return data;
 };
+
+export const getProjectDb = async (id) => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/projects.json`);
+  const data = await response.json();
+  for (let project in data) {
+    if (!data.hasOwnProperty(project)) {
+      continue;
+    }
+    if (data[project].id == id) {
+      return data[project];
+    }
+  }
+  // console.log(data);
+};

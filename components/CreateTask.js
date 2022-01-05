@@ -16,7 +16,7 @@ import styles2 from "./createTaskStyle";
 import { AuthContext } from "../context";
 import { combineData } from "../utils/DataHelper";
 
-export function CreateTask({ modalVisible, setModalVisible }) {
+export function CreateTask({ modalVisible, setModalVisible, ProjectId }) {
   const members = [
     {
       id: "1234A",
@@ -116,10 +116,18 @@ export function CreateTask({ modalVisible, setModalVisible }) {
     },
   ];
   const [data, setData] = useState({
-    newTask: { title: "", description: "", selectedMembers: [] },
+    newTask: {
+      ProjectId,
+      id: Math.random().toString(),
+      title: "",
+      description: "",
+      selectedMembers: [],
+    },
   });
 
   const handleSetValue = (field, value) => {
+    //component will not re render when we are modifying newTask
+    //because this newTask variable is a new variable
     let { newTask } = data;
     if (field === "selectedMembers") {
       let { selectedMembers } = newTask;
@@ -153,6 +161,11 @@ export function CreateTask({ modalVisible, setModalVisible }) {
     return value;
   };
 
+  const handleAssignment = () => {
+    console.log(data);
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <Modal
       animationType="slide"
@@ -176,6 +189,12 @@ export function CreateTask({ modalVisible, setModalVisible }) {
               placeholderTextColor="gray"
               style={styles2.textInput}
               onChangeText={(text) => handleSetValue("title", text)}
+            />
+            <TextInput
+              placeholder="Description"
+              placeholderTextColor="gray"
+              style={[styles2.textInput]}
+              onChangeText={(text) => handleSetValue("description", text)}
             />
             <View style={styles2.teamTextWrapper}>
               <Text style={styles2.teamText}>Select Members</Text>
@@ -215,8 +234,12 @@ export function CreateTask({ modalVisible, setModalVisible }) {
                 </View>
               </ScrollView>
             </View>
-            <TouchableOpacity style={styles2.btnWrapper}>
-              <Text style={styles2.btnText}>Send</Text>
+
+            <TouchableOpacity
+              style={styles2.btnWrapper}
+              onPress={() => handleAssignment()}
+            >
+              <Text style={styles2.btnText}>Assign</Text>
             </TouchableOpacity>
           </View>
         </View>
