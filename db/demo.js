@@ -137,3 +137,34 @@ export const getProjectDb = async (id) => {
   }
   // console.log(data);
 };
+
+export const addTask = (newTask) => {
+  var requestOptions = {
+    method: "POST",
+    body: JSON.stringify(newTask),
+  };
+  fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+};
+
+export const getTasksDb = async () => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`);
+  const data = await response.json();
+  return data;
+};
+
+export const getTaskDb = async (id) => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`);
+  const data = await response.json();
+  for (let task in data) {
+    if (!data.hasOwnProperty(task)) {
+      continue;
+    }
+    if (data[task].id == id) {
+      return data[task];
+    }
+  }
+  // console.log(data);
+};

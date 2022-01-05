@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -17,9 +17,11 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import styles2 from "./taskViewStyle";
 import appTheme from "../constants/colors";
 import { NavigationContainer } from "@react-navigation/native";
-import Calender from "../components/Calender";
+import { getTaskDb } from "../db/demo";
 
-export function TaskView({ navigation }) {
+export function TaskView({ navigation, ProjectId, taskId }) {
+  const [task, setTask] = useState({});
+
   const selectedTask = {
     id: 1,
     projectId: 1,
@@ -49,7 +51,7 @@ export function TaskView({ navigation }) {
       <SafeAreaView style={styles.modalContainer}>
         <TouchableOpacity
           style={styles.closeButton}
-          onPress={() => navigation.navigate("Project")}
+          onPress={() => navigation.navigate("Project", { ProjectId })}
         ></TouchableOpacity>
         <View style={styles.setModalDimensions("70%", "100%")}>
           <View style={styles2.container}>
@@ -115,7 +117,6 @@ export function TaskView({ navigation }) {
           </View>
         </View>
       </SafeAreaView>
-      <Calender />
     </Modal>
   );
 }

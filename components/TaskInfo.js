@@ -8,7 +8,7 @@ import styles from "./taskInfoStyle";
 import appTheme from "../constants/colors";
 import { AuthContext } from "../context";
 
-export function TaskInfo({ task, navigation }) {
+export function TaskInfo({ task, navigation, taskId }) {
   //   const { state, dispatch } = useContext(AuthContext);
 
   const handleBottomModal = () => {
@@ -24,7 +24,9 @@ export function TaskInfo({ task, navigation }) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate("TaskView")}>
+    <TouchableWithoutFeedback
+      onPress={() => navigation.navigate("TaskView", { taskId })}
+    >
       <View style={styles.container}>
         <AntDesign
           name="checksquareo"
@@ -45,11 +47,11 @@ export function TaskInfo({ task, navigation }) {
           />
         </View>
         <View style={styles.teamWrapper}>
-          {task?.members?.slice(0, 2)?.map((member) => (
+          {task?.selectedMembers?.slice(0, 2)?.map((member) => (
             <Image
               key={Math.random().toString()}
               style={styles.memberPhoto}
-              source={{ uri: member?.photo }}
+              source={{ uri: member?.image }}
             />
           ))}
         </View>

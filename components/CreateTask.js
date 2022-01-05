@@ -15,10 +15,16 @@ import {
 import styles2 from "./createTaskStyle";
 import { AuthContext } from "../context";
 import { combineData } from "../utils/DataHelper";
-import { addMember, getMembers } from "../db/demo";
+import { addTask, getMembers } from "../db/demo";
 import { EmptyListComponent } from "../components/EmptyListComponent";
+import { NavigationContainer } from "@react-navigation/native";
 
-export function CreateTask({ modalVisible, setModalVisible, ProjectId }) {
+export function CreateTask({
+  modalVisible,
+  setModalVisible,
+  ProjectId,
+  getDataP,
+}) {
   const [members, setMembers] = useState([]);
   const [data, setData] = useState({
     newTask: {
@@ -88,9 +94,10 @@ export function CreateTask({ modalVisible, setModalVisible, ProjectId }) {
     return value;
   };
 
-  const handleAssignment = () => {
-    console.log(data);
+  const handleTaskAssign = () => {
+    addTask(data.newTask);
     setModalVisible(!modalVisible);
+    getDataP();
   };
 
   return (
@@ -169,7 +176,7 @@ export function CreateTask({ modalVisible, setModalVisible, ProjectId }) {
             )}
             <TouchableOpacity
               style={styles2.btnWrapper}
-              onPress={() => handleAssignment()}
+              onPress={() => handleTaskAssign()}
             >
               <Text style={styles2.btnText}>Assign</Text>
             </TouchableOpacity>

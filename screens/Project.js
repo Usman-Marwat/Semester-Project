@@ -20,19 +20,29 @@ import { EmptyListComponent } from "../components/EmptyListComponent";
 import { AuthContext } from "../context";
 import appTheme from "../constants/colors";
 import { TaskView } from "./TaskView";
-import { getProjectDb } from "../db/demo";
+import { getProjectDb, getTasksDb } from "../db/demo";
 
 import { CreateTask } from "../components/CreateTask";
 
 export function Project({ navigation, route }) {
-  //   const project = route.params;
   const { ProjectId } = route.params;
   const [project, setProject] = useState({});
+  const [tasks, setTasks] = useState([]);
 
   const getData = async () => {
     try {
       const projectDb = await getProjectDb(ProjectId);
+      const tasksDb = await getTasksDb(ProjectId);
+      let tasksDbArray = [];
+      for (let taskDb in tasksDb) {
+        if (!tasksDb.hasOwnProperty(taskDb)) {
+          continue;
+        }
+        if (tasksDb[taskDb].ProjectId == ProjectId)
+          tasksDbArray.push(tasksDb[taskDb]);
+      }
       setProject(projectDb);
+      setTasks(tasksDbArray);
     } catch (error) {
       console.log(error.message);
     }
@@ -42,223 +52,6 @@ export function Project({ navigation, route }) {
   }, []);
 
   const [modalVisible, setModalVisible] = useState(false);
-
-  const tasks = [
-    {
-      id: 1,
-      projectId: 1,
-      title: "Dashboard Design",
-      members: [
-        {
-          name: "John Doe",
-          photo:
-            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-        },
-        {
-          name: "Ann Smith",
-          photo:
-            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-      ],
-      progress: 15,
-    },
-    {
-      id: 2,
-      projectId: 1,
-      title: "Mobile App Design",
-      members: [
-        {
-          name: "Miriam Cooper",
-          photo:
-            "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-        {
-          name: "Jessica Leonard",
-          photo:
-            "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-        },
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-      ],
-      progress: 100,
-    },
-    {
-      id: 3,
-      projectId: 2,
-      title: "Wireframe Design",
-      members: [
-        {
-          name: "Baron Dunecr",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-    {
-      id: 4,
-      projectId: 2,
-      title: "A/B Testing",
-      members: [
-        {
-          name: "Jeff Atwood",
-          photo:
-            "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-        },
-        {
-          name: "Ferindah Yerstu",
-          photo:
-            "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-        },
-      ],
-      progress: 80,
-    },
-  ];
-
   const tabs = ["Task List", "File", "Comments"];
 
   const [data, setData] = useState({
@@ -445,6 +238,7 @@ export function Project({ navigation, route }) {
                             task={task}
                             key={Math.random().toString()}
                             navigation={navigation}
+                            taskId={task.id}
                           />
                         ))}
                       </View>
@@ -460,6 +254,7 @@ export function Project({ navigation, route }) {
             modalVisible={modalVisible}
             setModalVisible={setModalVisible}
             ProjectId={ProjectId}
+            getDataP={getData}
           />
         </>
       ) : (
@@ -495,3 +290,217 @@ export function Project({ navigation, route }) {
 //     tasks: 24,
 //     status: "ongoing",
 //   };
+
+// // {
+//       id: 1,
+//       projectId: 1,
+//       title: "Dashboard Design",
+//       members: [
+//         {
+//           name: "John Doe",
+//           photo:
+//             "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+//         },
+//         {
+//           name: "Ann Smith",
+//           photo:
+//             "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//       ],
+//       progress: 15,
+//     },
+//     {
+//       id: 2,
+//       projectId: 1,
+//       title: "Mobile App Design",
+//       members: [
+//         {
+//           name: "Miriam Cooper",
+//           photo:
+//             "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//         {
+//           name: "Jessica Leonard",
+//           photo:
+//             "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+//         },
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//       ],
+//       progress: 100,
+//     },
+//     {
+//       id: 3,
+//       projectId: 2,
+//       title: "Wireframe Design",
+//       members: [
+//         {
+//           name: "Baron Dunecr",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
+//     {
+//       id: 4,
+//       projectId: 2,
+//       title: "A/B Testing",
+//       members: [
+//         {
+//           name: "Jeff Atwood",
+//           photo:
+//             "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
+//         },
+//         {
+//           name: "Ferindah Yerstu",
+//           photo:
+//             "https://images.unsplash.com/photo-1604072366595-e75dc92d6bdc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+//         },
+//       ],
+//       progress: 80,
+//     },
