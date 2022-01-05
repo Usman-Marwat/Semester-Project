@@ -28,9 +28,10 @@ const styles2 = StyleSheet.create({
   },
   teamTextWrapper: { width: "90%", marginBottom: 10 },
   teamText: {
-    fontSize: 16,
+    fontSize: 17,
     color: "gray",
     paddingLeft: 7,
+    marginTop: 20,
   },
   btnWrapper: {
     marginTop: "auto",
