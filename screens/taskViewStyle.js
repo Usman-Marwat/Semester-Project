@@ -83,6 +83,21 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: appTheme.INACTIVE_COLOR,
   },
+  btnWrapper: {
+    marginTop: "auto",
+    height: 45,
+    backgroundColor: appTheme.PRIMARY_COLOR,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 16,
+  },
 });
 
 export default styles;
