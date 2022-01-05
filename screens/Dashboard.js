@@ -256,7 +256,6 @@ export function Dashboard() {
       <View style={styles.contentBody}>
         <View style={styles.statisticsSection}>
           <Text style={styles.contentTitle}>All Contracts</Text>
-          <Text style>Statistics and Reports</Text>
           <View style={styles.statisticsContainer}>
             <View
               style={[

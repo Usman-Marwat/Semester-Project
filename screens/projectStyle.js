@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   inActiveProjectTabText: {
-    color: appTheme.PRIMARY_COLOR,
+    color: appTheme.INACTIVE_COLOR,
   },
   bottomContainer: {
     height: "65%",

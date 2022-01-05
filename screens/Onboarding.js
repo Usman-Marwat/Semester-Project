@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import Illustration from "../assets/illustration.png";
+import Illustration from "../assets/pic2.jpg";
 import styles from "./onboardingStyle";
 // import { navigateToNestedRoute } from "../../navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";

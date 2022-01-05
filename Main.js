@@ -45,7 +45,7 @@ export default function Main() {
         // clear error
       }
     };
-    // clearAll();
+    clearAll();
     // console.log(isLogged);
     // console.log(setIsLogged);
     loadDataFromAsync();

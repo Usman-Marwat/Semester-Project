@@ -6,6 +6,7 @@ import { Dashboard } from "../screens/Dashboard";
 import { Projects } from "../screens/Projects";
 import ProjectsStack from "../routes/projectsStack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import appTheme from "../constants/colors";
 
 const BottomTab = createMaterialBottomTabNavigator();
 
@@ -13,8 +14,8 @@ function MyTabs() {
   return (
     <BottomTab.Navigator
       activeColor="#f0edf6"
-      inactiveColor="#3e2465"
-      barStyle={{ backgroundColor: "coral" }}
+      inactiveColor="black"
+      barStyle={{ backgroundColor: appTheme.PRIMARY_COLOR }}
     >
       <BottomTab.Screen name="Dashboard" component={Dashboard} options={{}} />
       <BottomTab.Screen name="ProjectsS" component={ProjectsStack} />

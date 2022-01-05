@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     color: appTheme.INACTIVE_COLOR,
   },
   tasksBody: {
-    height: 300,
+    height: 315,
     // flex: 1,
   },
   tasksList: {

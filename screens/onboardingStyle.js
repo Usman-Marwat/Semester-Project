@@ -10,10 +10,10 @@ const styles = StyleSheet.create({
   },
   illustrationWrapper: { display: "flex", alignItems: "center" },
   illustrationContent: {
-    height: 300,
-    width: 250,
-    resizeMode: "contain",
-    marginTop: 100,
+    height: 400,
+    width: "100%",
+    resizeMode: "cover",
+    marginTop: 0,
     marginBottom: 30,
   },
   largeText: {
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 7,
     marginBottom: 15,
+    marginHorizontal: 30,
   },
   loginBtnText: {
     fontWeight: "bold",
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 45,
     borderRadius: 7,
+    marginHorizontal: 30,
   },
   signUpBtnText: { fontWeight: "bold", fontSize: 16, color: "#fff" },
 });
