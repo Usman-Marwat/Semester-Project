@@ -26,6 +26,7 @@ export default function Members() {
 
   const getData = async () => {
     try {
+      setLoading(true);
       let response = await fetch(
         `https://api.unsplash.com/photos?page=20&per_page=10&client_id=${unsplashApiKey}`
       );

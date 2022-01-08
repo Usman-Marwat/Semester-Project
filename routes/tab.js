@@ -16,6 +16,9 @@ function MyTabs() {
       activeColor="#f0edf6"
       inactiveColor="black"
       barStyle={{ backgroundColor: appTheme.PRIMARY_COLOR }}
+      screenOptions={{
+        tabBarStyle: { position: "absolute" },
+      }}
     >
       <BottomTab.Screen name="Dashboard" component={Dashboard} options={{}} />
       <BottomTab.Screen name="ProjectsS" component={ProjectsStack} />
