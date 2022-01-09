@@ -20,6 +20,7 @@ import { getScreenParent } from "../utils/NavigationHelper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLog, useSetIsLog } from "../context/LogContext";
 import UpdateProfile from "../components/UpdateProfile";
+import { LinearGradient } from "expo-linear-gradient";
 
 export function Profile({ navigation }) {
   isLogged = useLog();
@@ -33,14 +34,6 @@ export function Profile({ navigation }) {
   };
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleBackButton = () => {
-    navigation?.goBack();
-  };
-
-  const handleNavigation = (screen, params) => {
-    navigateToNestedRoute(getScreenParent(screen), screen, params);
-  };
-
   const clearAsyncStorage = async () => {
     try {
       await AsyncStorage.clear();
@@ -52,88 +45,82 @@ export function Profile({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View>
-          <View style={styles.profileDetailsSection}>
-            <View style={styles.profileInfoSection}>
-              <View style={styles.statisticsContainer}>
-                <Text style={styles.statisticsText}>135</Text>
-                <Text style={styles.statisticsTitle}>Completed Tasks</Text>
-              </View>
-              <Image
-                style={styles.profilePhoto}
-                source={{
-                  uri: user?.photo,
-                }}
-              />
-              <View style={styles.statisticsContainer}>
-                <Text style={styles.statisticsText}>20</Text>
-                <Text style={styles.statisticsTitle}>Ongoing Tasks</Text>
-              </View>
-            </View>
-            <View style={styles.profileCenterSection}>
-              <Text style={styles.nameText}>{user?.name}</Text>
-              <Text style={styles.designationText}>{user?.designation}</Text>
-              <TouchableOpacity
-                onPress={() => setModalVisible(!modalVisible)}
-                style={styles.editProfileWrapper}
-              >
-                <Text style={styles.editProfileText}>Edit Profile</Text>
-              </TouchableOpacity>
-            </View>
+      <View style={styles.profileDetailsSection}>
+        <View style={styles.profileInfoSection}>
+          <View style={styles.statisticsContainer}>
+            <Text style={styles.statisticsText}>135</Text>
+            <Text style={styles.statisticsTitle}>Completed Tasks</Text>
           </View>
-          <View style={styles.exploreSection}>
-            <Text style={styles.exploreHeader}>Explore</Text>
-            <View style={styles.exploreContent}>
-              <TouchableOpacity style={styles.singleExplore}>
-                <Ionicons name="people" size={22} color={appTheme.COLOR1} />
-                <Text style={styles.exploreText}>Members</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.singleExplore}
-                onPress={() => navigation.navigate("Todos")}
-              >
-                <MaterialCommunityIcons
-                  name="crown"
-                  size={22}
-                  color={appTheme.COLOR1}
-                />
-                <Text style={styles.exploreText}>My-Todos</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.singleExplore}>
-                <Fontisto
-                  name="pie-chart-1"
-                  size={22}
-                  color={appTheme.COLOR1}
-                />
-                <Text style={styles.exploreText}>Report</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.singleExplore}>
-                <SimpleLineIcons
-                  name="settings"
-                  size={22}
-                  color={appTheme.COLOR1}
-                />
-                <Text style={styles.exploreText}>Settings</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.singleExplore,
-                  { marginRight: "auto", marginLeft: "7%" },
-                ]}
-                onPress={() => clearAsyncStorage()}
-              >
-                <MaterialCommunityIcons
-                  name="logout"
-                  size={22}
-                  color={appTheme.COLOR1}
-                />
-                <Text style={styles.exploreText}>Log out</Text>
-              </TouchableOpacity>
-            </View>
+          <Image
+            style={styles.profilePhoto}
+            source={{
+              uri: user?.photo,
+            }}
+          />
+          <View style={styles.statisticsContainer}>
+            <Text style={styles.statisticsText}>20</Text>
+            <Text style={styles.statisticsTitle}>Ongoing Tasks</Text>
           </View>
         </View>
-      </ScrollView>
+        <View style={styles.profileCenterSection}>
+          <Text style={styles.nameText}>{user?.name}</Text>
+          <Text style={styles.designationText}>{user?.designation}</Text>
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+            <LinearGradient
+              colors={["#ff9068", "#ffa500"]}
+              style={styles.editProfileWrapper}
+            >
+              <Text style={styles.editProfileText}>Edit Profile</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.exploreSection}>
+        <Text style={styles.exploreHeader}>Explore</Text>
+        <View style={styles.exploreContent}>
+          <TouchableOpacity style={styles.singleExplore}>
+            <Ionicons name="people" size={22} color={appTheme.COLOR1} />
+            <Text style={styles.exploreText}>Members</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.singleExplore}
+            onPress={() => navigation.navigate("Todos")}
+          >
+            <MaterialCommunityIcons
+              name="crown"
+              size={22}
+              color={appTheme.COLOR1}
+            />
+            <Text style={styles.exploreText}>My-Todos</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.singleExplore}>
+            <Fontisto name="pie-chart-1" size={22} color={appTheme.COLOR1} />
+            <Text style={styles.exploreText}>Report</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.singleExplore}>
+            <SimpleLineIcons
+              name="settings"
+              size={22}
+              color={appTheme.COLOR1}
+            />
+            <Text style={styles.exploreText}>Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.singleExplore,
+              { marginRight: "auto", marginLeft: "7%" },
+            ]}
+            onPress={() => clearAsyncStorage()}
+          >
+            <MaterialCommunityIcons
+              name="logout"
+              size={22}
+              color={appTheme.COLOR1}
+            />
+            <Text style={styles.exploreText}>Log out</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
       <UpdateProfile
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}

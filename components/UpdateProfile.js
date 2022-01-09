@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import styles2 from "./createTaskStyle";
 import { combineData } from "../utils/DataHelper";
+import { LinearGradient } from "expo-linear-gradient";
 
 export function UpdateProfile({ modalVisible, setModalVisible }) {
   const members = [
@@ -204,8 +205,13 @@ export function UpdateProfile({ modalVisible, setModalVisible }) {
                 </View>
               </ScrollView>
             </View>
-            <TouchableOpacity style={styles2.btnWrapper}>
-              <Text style={styles2.btnText}>Send</Text>
+            <TouchableOpacity>
+              <LinearGradient
+                colors={["#ff9068", "#ffa500"]}
+                style={styles2.btnWrapper}
+              >
+                <Text style={styles2.btnText}> Set Profile</Text>
+              </LinearGradient>
             </TouchableOpacity>
           </View>
         </View>

@@ -9,20 +9,6 @@ import appTheme from "../constants/colors";
 import { AuthContext } from "../context";
 
 export function TaskInfo({ task, navigation, taskId }) {
-  //   const { state, dispatch } = useContext(AuthContext);
-
-  const handleBottomModal = () => {
-    dispatch({
-      type: "toggleBottomModal",
-      payload: { bottomModal: "TaskView" },
-    });
-
-    dispatch({
-      type: "viewTask",
-      payload: { selectedTask: task },
-    });
-  };
-
   return (
     <TouchableWithoutFeedback
       onPress={() => navigation.navigate("TaskView", { taskId })}

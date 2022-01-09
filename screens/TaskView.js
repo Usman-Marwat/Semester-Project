@@ -20,6 +20,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { getTaskDb } from "../db/demo";
 import { ScrollView } from "react-native-gesture-handler";
 import { EmptyListComponent } from "../components/EmptyListComponent";
+import { LinearGradient } from "expo-linear-gradient";
 
 export function TaskView({ navigation, ProjectId, route }) {
   const { taskId } = route.params;
@@ -118,12 +119,14 @@ export function TaskView({ navigation, ProjectId, route }) {
               </View>
               <Text style={styles2.longText}>dsad</Text>
 
-              <View style={styles2.bottomWrapper}>
-                <TouchableOpacity
-                  style={styles2.btnWrapper}
-                  onPress={() => delteTask()}
-                >
-                  <Text style={styles2.btnText}>Delete?</Text>
+              <View style={[styles2.bottomWrapper]}>
+                <TouchableOpacity onPress={() => deleteTask()}>
+                  <LinearGradient
+                    colors={["#ff9068", "#ffa500"]}
+                    style={styles2.btnWrapper}
+                  >
+                    <Text style={styles2.btnText}>Delete?</Text>
+                  </LinearGradient>
                 </TouchableOpacity>
               </View>
             </View>

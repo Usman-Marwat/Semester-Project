@@ -13,6 +13,7 @@ import styles from "./loginStyle";
 // import { navigateToNestedRoute } from "../../navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";
 import appTheme from "../constants/colors";
+import { LinearGradient } from "expo-linear-gradient";
 
 export function Login({ navigation }) {
   const handleBackButton = () => {
@@ -68,8 +69,13 @@ export function Login({ navigation }) {
             value={true}
           />
         </View>
-        <TouchableOpacity style={styles.loginBtnWrapper}>
-          <Text style={styles.loginBtnText}>LOGIN</Text>
+        <TouchableOpacity>
+          <LinearGradient
+            colors={["#ff9068", "#ffa500"]}
+            style={styles.loginBtnWrapper}
+          >
+            <Text style={styles.loginBtnText}>LOGIN</Text>
+          </LinearGradient>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.signUpBtnWrapper}

@@ -17,8 +17,8 @@ import styles from "./signUpStyle";
 import { getScreenParent } from "../utils/NavigationHelper";
 import appTheme from "../constants/colors";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-
 import { useLog, useSetIsLog } from "../context/LogContext";
+import { LinearGradient } from "expo-linear-gradient";
 
 export function SignUp({ navigation }) {
   const setIsLogged = useSetIsLog();
@@ -105,11 +105,13 @@ export function SignUp({ navigation }) {
             value={true}
           />
         </View>
-        <TouchableOpacity
-          style={styles.signUpBtnWrapper}
-          onPress={saveDataToAsync}
-        >
-          <Text style={styles.signUpBtnText}>SIGN UP</Text>
+        <TouchableOpacity onPress={saveDataToAsync}>
+          <LinearGradient
+            colors={["#ff9068", "#ffa500"]}
+            style={styles.signUpBtnWrapper}
+          >
+            <Text style={styles.signUpBtnText}>SIGN UP</Text>
+          </LinearGradient>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.loginBtnWrapper}

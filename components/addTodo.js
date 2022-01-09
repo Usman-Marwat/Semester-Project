@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function AddTodo({
   submitHandler,
@@ -28,18 +36,28 @@ export default function AddTodo({
         value={text}
       />
       {!toggleBtns && (
-        <Button
-          color="steelblue"
-          onPress={() => submitHandler(text)}
-          title="add todo"
-        />
+        <View style={styles.container}>
+          <TouchableOpacity onPress={() => submitHandler(text)}>
+            <LinearGradient
+              colors={["#ff9068", "#ffa500"]}
+              style={styles.btnWrapper}
+            >
+              <Text style={styles.btnText}>Add Todo</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
       )}
       {toggleBtns && (
-        <Button
-          color="steelblue"
-          onPress={() => UpdateCurrent(text)}
-          title="Update"
-        />
+        <View style={styles.container}>
+          <TouchableOpacity onPress={() => UpdateCurrent(text)}>
+            <LinearGradient
+              colors={["#ff9068", "#ffa500"]}
+              style={styles.btnWrapper}
+            >
+              <Text style={styles.btnText}>Update</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
       )}
     </View>
   );
@@ -51,5 +69,23 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderBottomWidth: 1,
     borderBottomColor: "#ddd",
+  },
+  container: {
+    display: "flex",
+    alignItems: "center",
+  },
+  btnWrapper: {
+    height: 35,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    width: 140,
+    borderRadius: 7,
+    marginHorizontal: 20,
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 16,
   },
 });

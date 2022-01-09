@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     height: 45,
     borderRadius: 7,
     marginBottom: 15,
+    marginHorizontal: 20,
   },
   loginBtnText: { fontWeight: "bold", fontSize: 16, color: "#fff" },
   signUpBtnWrapper: {
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: 45,
     borderRadius: 7,
+    marginHorizontal: 20,
   },
   indexBtnWrapper: {
     borderColor: appTheme.INACTIVE_COLOR,

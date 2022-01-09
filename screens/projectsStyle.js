@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   projectsBody: {
     paddingTop: 20,
     paddingHorizontal: 16,
-    paddingBottom: 120,
+    paddingBottom: 150,
   },
   projectsTabs: {
     backgroundColor: "#fff",
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   inActiveProjectTabText: {
-    color: appTheme.PRIMARY_COLOR,
+    color: appTheme.INACTIVE_COLOR,
   },
 });
 

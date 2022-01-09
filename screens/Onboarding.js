@@ -10,6 +10,7 @@ import Illustration from "../assets/pic2.jpg";
 import styles from "./onboardingStyle";
 // import { navigateToNestedRoute } from "../../navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";
+import { LinearGradient } from "expo-linear-gradient";
 
 export function Onboarding({ navigation }) {
   return (
@@ -28,11 +29,13 @@ export function Onboarding({ navigation }) {
       >
         <Text style={styles.loginBtnText}>LOGIN</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.signUpBtnWrapper}
-        onPress={() => navigation.navigate("SignUp")}
-      >
-        <Text style={styles.signUpBtnText}>SIGN UP</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+        <LinearGradient
+          colors={["#ff9068", "#ffa500"]}
+          style={styles.signUpBtnWrapper}
+        >
+          <Text style={styles.signUpBtnText}>SIGN UP</Text>
+        </LinearGradient>
       </TouchableOpacity>
     </SafeAreaView>
   );
