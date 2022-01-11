@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import appTheme from "../constants/colors";
+import appTheme from "../../constants/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -53,20 +53,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginBottom: 40,
   },
-  savePwdText: { color: appTheme.COLOR2, fontWeight: "bold" },
+  savePwdText: { color: appTheme.PRIMARY_COLOR, fontWeight: "bold" },
   loginBtnWrapper: {
-    borderColor: appTheme.INACTIVE_COLOR,
-    borderWidth: 1,
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 45,
-    borderRadius: 7,
-    marginHorizontal: 20,
-  },
-  loginBtnText: { fontWeight: "bold", fontSize: 16, color: "#000000aa" },
-  signUpBtnWrapper: {
     backgroundColor: appTheme.PRIMARY_COLOR,
     display: "flex",
     flexDirection: "row",
@@ -77,7 +65,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginHorizontal: 20,
   },
-  signUpBtnText: { fontWeight: "bold", fontSize: 16, color: "#fff" },
+  loginBtnText: { fontWeight: "bold", fontSize: 16, color: "#fff" },
+  signUpBtnWrapper: {
+    borderColor: appTheme.INACTIVE_COLOR,
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    height: 45,
+    borderRadius: 7,
+    marginHorizontal: 20,
+  },
   indexBtnWrapper: {
     borderColor: appTheme.INACTIVE_COLOR,
     display: "flex",
@@ -87,6 +86,7 @@ const styles = StyleSheet.create({
     height: 45,
     marginTop: 20,
   },
+  signUpBtnText: { fontWeight: "bold", fontSize: 16, color: "#000000aa" },
 });
 
 export default styles;

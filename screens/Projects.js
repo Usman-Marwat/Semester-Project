@@ -8,7 +8,7 @@ import {
 } from "react-native";
 // import shortid from "shortid";
 // import { nanoid } from "nanoid";
-import styles from "./projectsStyle";
+import styles from "../styles/screens/projectsStyle";
 import { AuthContext } from "../context";
 import { TabScreenHeader } from "../components/TabScreenHeader";
 import { ProjectCard } from "../components/ProjectCard";

@@ -1,11 +1,9 @@
 import * as React from "react";
-import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Onboarding } from "../screens/Onboarding";
 import { Login } from "../screens/Login";
-import { SignUp } from "../screens/SignUp";
-import ReviewDetails from "../screens/ReviewDetails";
+import { SignUp } from "../screens/Register";
 const Stack = createNativeStackNavigator();
 function StartNavigator() {
   return (
@@ -13,27 +11,11 @@ function StartNavigator() {
       <Stack.Navigator
         initialRouteName="Onboarding"
         screenOptions={{
-          headerStyle: {
-            backgroundColor: "#f4511e",
-          },
-          headerTintColor: "#fff",
-        }}
-        screenOptions={{
           headerShown: false,
         }}
       >
-        <Stack.Screen
-          name="Onboarding"
-          component={Onboarding}
-          options={{
-            title: "Onboarding",
-            headerStyle: {
-              backgroundColor: "steelblue",
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="Onboarding" component={Onboarding} />
+        <Stack.Screen name="Register" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 // import shortid from "shortid";
-import styles from "./membersStyle";
+import styles from "../styles/screens/membersStyle";
 import appTheme from "../constants/colors";
 import { TabScreenHeader } from "../components/TabScreenHeader";
 import { EmptyListComponent } from "../components/EmptyListComponent";

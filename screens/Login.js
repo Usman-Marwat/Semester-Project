@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,19 +9,20 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { MaterialIcons, Ionicons, Octicons } from "@expo/vector-icons";
-import styles from "./loginStyle";
+import styles from "../styles/screens/loginStyle";
 // import { navigateToNestedRoute } from "../../navigators/RootNavigation";
 import { getScreenParent } from "../utils/NavigationHelper";
 import appTheme from "../constants/colors";
 import { LinearGradient } from "expo-linear-gradient";
 
-export function Login({ navigation }) {
+export function Login({ navigation, route }) {
+  const [username, setUsername] = useState(false);
+  const [password, setPassword] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
   const handleBackButton = () => {
     navigation?.goBack();
-  };
-
-  const handleNavigation = (screen, params) => {
-    navigateToNestedRoute(getScreenParent(screen), screen, params);
   };
 
   return (
@@ -46,6 +47,7 @@ export function Login({ navigation }) {
             placeholder="Username"
             placeholderTextColor="gray"
             style={styles.textInput}
+            value={username}
           />
         </View>
         <View style={styles.inputRow}>
@@ -55,6 +57,7 @@ export function Login({ navigation }) {
             placeholderTextColor="gray"
             secureTextEntry={true}
             style={styles.textInput}
+            value={password}
           />
           <Octicons name="eye-closed" size={20} color="gray" />
         </View>
@@ -62,11 +65,12 @@ export function Login({ navigation }) {
           <Text style={styles.savePwdText}>Save Password</Text>
           <Switch
             trackColor={{
-              false: appTheme.INACTIVE_COLOR,
-              true: appTheme.COLOR2,
+              false: appTheme.GRADIENT_COLOR1,
+              true: appTheme.GRADIENT_COLOR1,
             }}
-            thumbColor="#fff"
-            value={true}
+            ios_backgroundColor={appTheme.GRADIENT_COLOR2}
+            onValueChange={toggleSwitch}
+            value={isEnabled}
           />
         </View>
         <TouchableOpacity>
@@ -79,7 +83,7 @@ export function Login({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.signUpBtnWrapper}
-          onPress={() => navigation.navigate("SignUp")}
+          onPress={() => navigation.navigate("Register")}
         >
           <Text style={styles.signUpBtnText}>
             Don't have an account? SIGN UP

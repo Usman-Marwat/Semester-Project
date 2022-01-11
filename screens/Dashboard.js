@@ -10,7 +10,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import DropDownPicker from "react-native-dropdown-picker";
-import styles from "./dashboardStyle";
+import styles from "../styles/screens/dashboardStyle";
 import { TaskInfo } from "../components/TaskInfo";
 import { formatCurrentDate } from "../utils/DataHelper";
 import appTheme from "../constants/colors";

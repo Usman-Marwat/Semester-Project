@@ -12,7 +12,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import ProgressCircle from "react-native-progress-circle";
 // import shortid from "shortid";
 import DropDownPicker from "react-native-dropdown-picker";
-import styles from "./projectStyle";
+import styles from "../styles/screens/projectStyle";
 import { TabScreenHeader } from "../components/TabScreenHeader";
 import { TaskInfo } from "../components/TaskInfo";
 import { combineData } from "../utils/DataHelper";

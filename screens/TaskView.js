@@ -14,7 +14,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import styles2 from "./taskViewStyle";
+import styles2 from "../styles/screens/taskViewStyle";
 import appTheme from "../constants/colors";
 import { NavigationContainer } from "@react-navigation/native";
 import { getTaskDb } from "../db/demo";

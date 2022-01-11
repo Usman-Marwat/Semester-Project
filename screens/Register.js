@@ -12,9 +12,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Octicons from "react-native-vector-icons/Octicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import styles from "./signUpStyle";
-// import { navigateToNestedRoute } from "../shared/navigators/RootNavigation";
-import { getScreenParent } from "../utils/NavigationHelper";
+import styles from "../styles/screens/registerStyle";
 import appTheme from "../constants/colors";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useLog, useSetIsLog } from "../context/LogContext";
@@ -25,17 +23,20 @@ export function SignUp({ navigation }) {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
   const handleBackButton = () => {
     navigation?.goBack();
   };
 
-  const saveDataToAsync = async () => {
+  const saveCredentials = async () => {
     console.log("Saving-------------------");
     await AsyncStorage.setItem(
       "@user_me",
       JSON.stringify({ username, password, email })
     );
-    setIsLogged(true);
+    navigation.navigate("Login", { username, password });
     console.log("Saving Done!");
   };
 
@@ -98,19 +99,20 @@ export function SignUp({ navigation }) {
           <Text style={styles.savePwdText}>Save Password</Text>
           <Switch
             trackColor={{
-              false: appTheme.INACTIVE_COLOR,
-              true: appTheme.COLOR2,
+              false: appTheme.GRADIENT_COLOR1,
+              true: appTheme.GRADIENT_COLOR1,
             }}
-            thumbColor="#fff"
-            value={true}
+            ios_backgroundColor={appTheme.GRADIENT_COLOR2}
+            onValueChange={toggleSwitch}
+            value={isEnabled}
           />
         </View>
-        <TouchableOpacity onPress={saveDataToAsync}>
+        <TouchableOpacity onPress={saveCredentials}>
           <LinearGradient
             colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
             style={styles.signUpBtnWrapper}
           >
-            <Text style={styles.signUpBtnText}>SIGN UP</Text>
+            <Text style={styles.signUpBtnText}>REGISTER</Text>
           </LinearGradient>
         </TouchableOpacity>
         <TouchableOpacity

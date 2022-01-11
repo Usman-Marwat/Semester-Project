@@ -1,17 +1,10 @@
 import "react-native-gesture-handler";
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text } from "react-native";
-import Home from "./screens/Home";
-import * as Font from "expo-font";
-import { AppLoading } from "expo";
 import { useFonts } from "expo-font";
-// import Navigator from "./routes/homeStack";
 import Navigator from "./routes/drawer";
 import StartNavigator from "./routes/startStack";
 import { Provider as PaperProvider } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-// export const LogContext = React.createContext();
 import { useLog, useSetIsLog } from "./context/LogContext";
 
 export default function Main() {
@@ -45,9 +38,7 @@ export default function Main() {
         // clear error
       }
     };
-    clearAll();
-    // console.log(isLogged);
-    // console.log(setIsLogged);
+    // clearAll();
     loadDataFromAsync();
   }, []);
 
