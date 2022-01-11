@@ -19,6 +19,7 @@ import { addTask, getMembers } from "../db/demo";
 import { EmptyListComponent } from "../components/EmptyListComponent";
 import { NavigationContainer } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import appTheme from "../constants/colors";
 
 export function CreateTask({
   modalVisible,
@@ -177,7 +178,7 @@ export function CreateTask({
             )}
             <TouchableOpacity onPress={() => handleTaskAssign()}>
               <LinearGradient
-                colors={["#ff9068", "#ffa500"]}
+                colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
                 style={styles2.btnWrapper}
               >
                 <Text style={styles2.btnText}> Assign</Text>

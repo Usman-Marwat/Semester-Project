@@ -71,7 +71,7 @@ export function Login({ navigation }) {
         </View>
         <TouchableOpacity>
           <LinearGradient
-            colors={["#ff9068", "#ffa500"]}
+            colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
             style={styles.loginBtnWrapper}
           >
             <Text style={styles.loginBtnText}>LOGIN</Text>

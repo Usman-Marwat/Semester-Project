@@ -67,7 +67,7 @@ export function Profile({ navigation }) {
           <Text style={styles.designationText}>{user?.designation}</Text>
           <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
             <LinearGradient
-              colors={["#ff9068", "#ffa500"]}
+              colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
               style={styles.editProfileWrapper}
             >
               <Text style={styles.editProfileText}>Edit Profile</Text>

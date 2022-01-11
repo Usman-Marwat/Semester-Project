@@ -107,7 +107,7 @@ export function SignUp({ navigation }) {
         </View>
         <TouchableOpacity onPress={saveDataToAsync}>
           <LinearGradient
-            colors={["#ff9068", "#ffa500"]}
+            colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
             style={styles.signUpBtnWrapper}
           >
             <Text style={styles.signUpBtnText}>SIGN UP</Text>

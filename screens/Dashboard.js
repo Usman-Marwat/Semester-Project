@@ -329,13 +329,13 @@ export function Dashboard() {
         </View>
         <View style={styles.tasksSection}>
           <View style={styles.tasksBody}>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            {/* <ScrollView showsVerticalScrollIndicator={false}>
               <View style={styles.tasksList}>
                 {getTasks()?.map((task) => (
                   <TaskInfo task={task} key={Math.random().toString()} />
                 ))}
               </View>
-            </ScrollView>
+            </ScrollView> */}
           </View>
         </View>
       </View>

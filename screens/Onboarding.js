@@ -8,9 +8,8 @@ import {
 } from "react-native";
 import Illustration from "../assets/pic2.jpg";
 import styles from "./onboardingStyle";
-// import { navigateToNestedRoute } from "../../navigators/RootNavigation";
-import { getScreenParent } from "../utils/NavigationHelper";
 import { LinearGradient } from "expo-linear-gradient";
+import appTheme from "../constants/colors";
 
 export function Onboarding({ navigation }) {
   return (
@@ -31,7 +30,7 @@ export function Onboarding({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
         <LinearGradient
-          colors={["#ff9068", "#ffa500"]}
+          colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
           style={styles.signUpBtnWrapper}
         >
           <Text style={styles.signUpBtnText}>SIGN UP</Text>

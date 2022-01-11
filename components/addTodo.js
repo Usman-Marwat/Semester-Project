@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import appTheme from "../constants/colors";
 
 export default function AddTodo({
   submitHandler,
@@ -39,7 +40,7 @@ export default function AddTodo({
         <View style={styles.container}>
           <TouchableOpacity onPress={() => submitHandler(text)}>
             <LinearGradient
-              colors={["#ff9068", "#ffa500"]}
+              colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
               style={styles.btnWrapper}
             >
               <Text style={styles.btnText}>Add Todo</Text>
@@ -51,7 +52,7 @@ export default function AddTodo({
         <View style={styles.container}>
           <TouchableOpacity onPress={() => UpdateCurrent(text)}>
             <LinearGradient
-              colors={["#ff9068", "#ffa500"]}
+              colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
               style={styles.btnWrapper}
             >
               <Text style={styles.btnText}>Update</Text>

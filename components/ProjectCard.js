@@ -2,12 +2,8 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ProgressCircle from "react-native-progress-circle";
-// import shortid from "shortid";
-// import { nanoid } from "nanoid";
 import styles from "./projectCardStyle";
 import appTheme from "../constants/colors";
-// import { navigateToNestedRoute } from "../../../navigators/RootNavigation";
-import { getScreenParent } from "../utils/NavigationHelper";
 
 export function ProjectCard({ project, navigation }) {
   return (

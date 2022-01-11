@@ -13,6 +13,7 @@ import {
 import styles2 from "./createTaskStyle";
 import { combineData } from "../utils/DataHelper";
 import { LinearGradient } from "expo-linear-gradient";
+import appTheme from "../constants/colors";
 
 export function UpdateProfile({ modalVisible, setModalVisible }) {
   const members = [
@@ -207,7 +208,7 @@ export function UpdateProfile({ modalVisible, setModalVisible }) {
             </View>
             <TouchableOpacity>
               <LinearGradient
-                colors={["#ff9068", "#ffa500"]}
+                colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
                 style={styles2.btnWrapper}
               >
                 <Text style={styles2.btnText}> Set Profile</Text>

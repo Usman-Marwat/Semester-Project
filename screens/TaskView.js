@@ -122,7 +122,10 @@ export function TaskView({ navigation, ProjectId, route }) {
               <View style={[styles2.bottomWrapper]}>
                 <TouchableOpacity onPress={() => deleteTask()}>
                   <LinearGradient
-                    colors={["#ff9068", "#ffa500"]}
+                    colors={[
+                      appTheme.GRADIENT_COLOR1,
+                      appTheme.GRADIENT_COLOR2,
+                    ]}
                     style={styles2.btnWrapper}
                   >
                     <Text style={styles2.btnText}>Delete?</Text>
