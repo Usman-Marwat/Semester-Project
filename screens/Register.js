@@ -17,6 +17,7 @@ import appTheme from "../constants/colors";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { useLog, useSetIsLog } from "../context/LogContext";
 import { LinearGradient } from "expo-linear-gradient";
+import { addUser } from "../db/demo";
 
 export function SignUp({ navigation }) {
   const setIsLogged = useSetIsLog();
@@ -34,9 +35,14 @@ export function SignUp({ navigation }) {
     console.log("Saving-------------------");
     await AsyncStorage.setItem(
       "@user_me",
-      JSON.stringify({ username, password, email })
+      JSON.stringify({
+        username,
+        password,
+        email,
+      })
     );
-    navigation.navigate("Login", { username, password });
+    addUser({ username, password, email });
+    navigation.navigate("Login", { username, password, email });
     console.log("Saving Done!");
   };
 
@@ -73,7 +79,6 @@ export function SignUp({ navigation }) {
           <TextInput
             placeholder="Email"
             placeholderTextColor="gray"
-            secureTextEntry={true}
             style={styles.textInput}
             value={email}
             onChangeText={(text) => {

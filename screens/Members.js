@@ -9,14 +9,8 @@ import {
   Image,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-// import shortid from "shortid";
 import styles from "../styles/screens/membersStyle";
-import appTheme from "../constants/colors";
-import { TabScreenHeader } from "../components/TabScreenHeader";
 import { EmptyListComponent } from "../components/EmptyListComponent";
-import { AuthContext } from "../context";
-import { getScreenParent } from "../utils/NavigationHelper";
-
 import { addMember, getMembers } from "../db/demo";
 
 const unsplashApiKey = "suzlDEXmdc2xWOrHZzzJ6Qi5hjR5IxwucQSEodEnnnA";

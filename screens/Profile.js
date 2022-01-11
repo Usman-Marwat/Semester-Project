@@ -13,10 +13,6 @@ import Fontisto from "react-native-vector-icons/Fontisto";
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import styles from "../styles/screens/profileStyle";
 import appTheme from "../constants/colors";
-import { AuthContext } from "../context";
-import { TabScreenHeader } from "../components/TabScreenHeader";
-// import { navigateToNestedRoute } from "../../navigators/RootNavigation";
-import { getScreenParent } from "../utils/NavigationHelper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLog, useSetIsLog } from "../context/LogContext";
 import UpdateProfile from "../components/UpdateProfile";
@@ -25,18 +21,18 @@ import { LinearGradient } from "expo-linear-gradient";
 export function Profile({ navigation }) {
   isLogged = useLog();
   setIsLogged = useSetIsLog();
-  const user = {
+  const [user, setUser] = useState({
     id: "0123V",
     name: "Usman Marwat",
     photo:
       "https://images.unsplash.com/photo-1609010697446-11f2155278f0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
     designation: "Lead Designer",
-  };
+  });
   const [modalVisible, setModalVisible] = useState(false);
 
   const clearAsyncStorage = async () => {
     try {
-      await AsyncStorage.clear();
+      await AsyncStorage.removeItem("@user_me");
       setIsLogged(false);
     } catch (e) {
       // clear error

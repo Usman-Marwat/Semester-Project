@@ -115,24 +115,12 @@ export function UpdateProfile({ modalVisible, setModalVisible }) {
     },
   ];
   const [data, setData] = useState({
-    newTask: { title: "", description: "", selectedMembers: [] },
+    newUser: { username: "", designation: "", profile: "" },
   });
 
   const handleSetValue = (field, value) => {
-    let { newTask } = data;
-    if (field === "selectedMembers") {
-      let { selectedMembers } = newTask;
-      const foundIndex = selectedMembers?.findIndex((a) => a?.id === value?.id);
-      if (foundIndex === -1) {
-        selectedMembers.push(value);
-      } else {
-        selectedMembers = selectedMembers.filter((a) => a?.id !== value?.id);
-      }
-      newTask["selectedMembers"] = selectedMembers;
-    } else {
-      newTask[field] = value;
-    }
-
+    let { newUser } = data;
+    newUser[field] = value;
     setData(
       combineData(data, {
         newTask,
@@ -163,47 +151,23 @@ export function UpdateProfile({ modalVisible, setModalVisible }) {
           <View style={styles2.container}>
             <Text style={styles2.boldText}>Create Task</Text>
             <TextInput
-              placeholder="Title"
+              placeholder="UserName"
+              placeholderTextColor="gray"
+              style={styles2.textInput}
+              onChangeText={(text) => handleSetValue("title", text)}
+            />
+            <TextInput
+              placeholder="Designation"
               placeholderTextColor="gray"
               style={styles2.textInput}
               onChangeText={(text) => handleSetValue("title", text)}
             />
             <View style={styles2.teamTextWrapper}>
-              <Text style={styles2.teamText}>Select Members</Text>
+              {/* <Text style={styles2.teamText}>Select Members</Text> */}
             </View>
             <View style={styles2.teamSection}>
               <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles2.teamWrapper}>
-                  {members?.map((member) => (
-                    <TouchableOpacity
-                      key={Math.random().toString()}
-                      style={[
-                        styles2.memberWrapper,
-                        isSelectedMember(member)
-                          ? styles2.activeTeamWrapper
-                          : null,
-                      ]}
-                      onPress={() => handleSetValue("selectedMembers", member)}
-                    >
-                      <Image
-                        style={styles2.memberPhoto}
-                        source={{ uri: member?.photo }}
-                      />
-                      <Text
-                        style={[
-                          styles2.memberName,
-                          isSelectedMember(member)
-                            ? styles2.activeMemberName
-                            : null,
-                        ]}
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
-                      >
-                        {member?.name}
-                      </Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
+                <View style={styles2.teamWrapper}></View>
               </ScrollView>
             </View>
             <TouchableOpacity>

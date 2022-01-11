@@ -166,5 +166,41 @@ export const getTaskDb = async (id) => {
       return data[task];
     }
   }
-  // console.log(data);
+};
+
+export const addUser = (newUser) => {
+  var requestOptions = {
+    method: "POST",
+    body: JSON.stringify(newUser),
+  };
+  fetch(`${FIREBASE_API_ENDPOINT}/users.json`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
+};
+
+export const isUserDb = async ({ username, password }) => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/users.json`);
+  const data = await response.json();
+  for (let user in data) {
+    if (!data.hasOwnProperty(user)) {
+      continue;
+    }
+    if (data[user].username == username && data[user].password == password) {
+      return true;
+    }
+  }
+};
+
+export const getUserDb = async () => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/users.json`);
+  const data = await response.json();
+  for (let task in data) {
+    if (!data.hasOwnProperty(task)) {
+      continue;
+    }
+    if (data[task].id == id) {
+      return data[task];
+    }
+  }
 };
