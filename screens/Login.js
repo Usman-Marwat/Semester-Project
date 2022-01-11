@@ -19,6 +19,7 @@ import { isUserDb } from "../db/demo";
 export function Login({ navigation, route }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
   // const { itemId, otherParam } = route.params;
@@ -56,6 +57,7 @@ export function Login({ navigation, route }) {
     if (route.params?.username && route.params?.password) {
       setUsername(route.params.username);
       setPassword(route.params.password);
+      setEmail(route.params.email);
     }
     //if coming to the login screen directly
   }, []);

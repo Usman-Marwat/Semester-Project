@@ -1,5 +1,6 @@
 //the similar properties in data will be replaced by that of params
 export const combineData = (data, params) => {
+  //note that the params are not changed directly  because they may be used else where in the function
   const obj = {};
   for (const property in params) {
     obj[property] = params[property];

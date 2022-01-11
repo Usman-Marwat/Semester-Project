@@ -195,12 +195,20 @@ export const isUserDb = async ({ username, password }) => {
 export const getUserDb = async () => {
   const response = await fetch(`${FIREBASE_API_ENDPOINT}/users.json`);
   const data = await response.json();
-  for (let task in data) {
-    if (!data.hasOwnProperty(task)) {
-      continue;
-    }
-    if (data[task].id == id) {
-      return data[task];
-    }
+  for (let user in data) {
+    // console.log(data[user]);
+    return data[user];
   }
+};
+
+export const updateUserDb = (newUser) => {
+  const id = "-Mt8sTI4PIkoXdx3M4aD";
+  var requestOptions = {
+    method: "PATCH",
+    body: JSON.stringify(newUser),
+  };
+  fetch(`${FIREBASE_API_ENDPOINT}/users/${id}.json`, requestOptions)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 };
