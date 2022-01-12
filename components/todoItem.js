@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function TodoItem({
   updateHandler,
@@ -12,7 +13,7 @@ export default function TodoItem({
   return (
     <View style={styles.item}>
       <TouchableOpacity onPress={() => updateHandler(item.key)}>
-        <MaterialIcons name="update" size={24} color="black" />
+        <AntDesign name="edit" size={24} color="black" />
       </TouchableOpacity>
       <Text style={styles.itemText}>{item.text}</Text>
       <TouchableOpacity onPress={() => pressHandler(item.key)}>

@@ -14,6 +14,8 @@ import styles2 from "./createTaskStyle";
 import { combineData } from "../utils/DataHelper";
 import { LinearGradient } from "expo-linear-gradient";
 import appTheme from "../constants/colors";
+import * as ImagePicker from "expo-image-picker";
+import { Feather } from "@expo/vector-icons";
 
 export function UpdateProfile({
   navigation,
@@ -22,14 +24,32 @@ export function UpdateProfile({
   user,
   updateHandler,
 }) {
+  const [image, setImage] = useState(null);
   const [data, setData] = useState({
-    newUser: { username: "", designation: "", profile: "" },
+    newUser: { username: "", designation: "", photo: "" },
   });
 
   const handleSetValue = (field, value) => {
     let { newUser } = data;
     newUser[field] = value;
     setData(combineData(data, newUser));
+  };
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    const photo = await FileSystem.readAsStringAsync(result.uri, {
+      encoding: "base64",
+    });
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+    return photo;
   };
 
   return (
@@ -57,11 +77,20 @@ export function UpdateProfile({
             <View style={styles2.teamTextWrapper}>
               {/* <Text style={styles2.teamText}>Select Members</Text> */}
             </View>
-            <View style={styles2.teamSection}>
+            <View style={styles.teamSection}>
               <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={styles2.teamWrapper}></View>
+                <View style={styles.teamWrapper}>
+                  <TouchableOpacity
+                    onPress={() => handleSetValue("photo", pickImage())}
+                    style={styles.btnWrapper}
+                  >
+                    <Feather name="image" size={24} color="black" />
+                    <Text style={styles.btnText}> Upload Photo</Text>
+                  </TouchableOpacity>
+                </View>
               </ScrollView>
             </View>
+
             <TouchableOpacity
               onPress={() => updateHandler(combineData(user, data))}
             >
@@ -118,6 +147,27 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   }),
+  teamSection: { height: 180, width: "90%" },
+  teamWrapper: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  btnWrapper: {
+    height: 75,
+    backgroundColor: appTheme.PRIMARY_COLOR,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 65,
+    width: 140,
+    borderRadius: 7,
+    marginHorizontal: 20,
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 16,
+  },
 });
 
 export default UpdateProfile;

@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList, Alert } from "react-native";
 import Header from "../components/header";
 import TodoItem from "../components/todoItem";
 import AddTodo from "../components/addTodo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+//  { text: "play on the switch", key: "4" },
+//     { text: "buy coffee", key: "1" },
+//     { text: "create an app", key: "2" },
+//     { text: "play on the switch again", key: "3" },
 
 export default function Todos({ navigation }) {
-  const [todos, setTodos] = useState([
-    { text: "play on the switch", key: "4" },
-    { text: "buy coffee", key: "1" },
-    { text: "create an app", key: "2" },
-    { text: "play on the switch again", key: "3" },
-  ]);
+  const [todos, setTodos] = useState([]);
   const [toggleBtns, setToggleBtns] = useState(false);
   const [updateText, setUpdateText] = useState("");
   const [updateKey, setUpdateKey] = useState("");
+
+  const getData = async () => {
+    let items = await AsyncStorage.getItem("@todos_me");
+    var parsed = await JSON.parse(items);
+    if (parsed) setTodos(parsed);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const updateHandler = (key) => {
     console.log(todos.length);
@@ -27,13 +38,16 @@ export default function Todos({ navigation }) {
   };
 
   const pressHandler = (key) => {
-    Alert.alert("Delete?", "Are You sure ", [
+    Alert.alert("Delete!", "Are You sure want to remove this todo?", [
       {
         text: "Yes",
-        onPress: () =>
-          setTodos((prevTodos) => {
-            return prevTodos.filter((todo) => todo.key != key);
-          }),
+        onPress: () => {
+          //directlt if e update throygh the
+          let newTodos = todos;
+          newTodos = newTodos.filter((todo) => todo.key != key);
+          AsyncStorage.setItem("@todos_me", JSON.stringify(newTodos));
+          getData();
+        },
       },
       {
         text: "No",
@@ -43,15 +57,18 @@ export default function Todos({ navigation }) {
   };
 
   const UpdateCurrent = (text) => {
+    let newTodos = todos;
     if (text.length > 3) {
-      todos.forEach((todo, index) => {
+      newTodos.forEach((todo, index) => {
         if (todo.key === updateKey) {
           todo.text = text;
         }
-        //this component rerender below was important after setting th
-        setToggleBtns(!toggleBtns);
-        setUpdateText("");
       });
+      //this component rerender below was important after setting th
+      setToggleBtns(!toggleBtns);
+      setUpdateText("");
+      AsyncStorage.setItem("@todos_me", JSON.stringify(newTodos));
+      getData();
     } else {
       Alert.alert("OOPS", "Todo must be over 3 characters long", [
         { text: "Understood", onPress: () => console.log("alert closed") },
@@ -59,11 +76,19 @@ export default function Todos({ navigation }) {
     }
   };
 
-  const submitHandler = (text) => {
+  const submitHandler = async (text) => {
     if (text.length > 3) {
-      setTodos((prevTodos) => {
-        return [{ text, key: Math.random().toString() }, ...prevTodos];
+      await AsyncStorage.getItem("@todos_me", (err, result) => {
+        const todo = [{ text, key: Math.random().toString() }];
+        if (result !== null) {
+          var newTodos = JSON.parse(result).concat(todo);
+          AsyncStorage.setItem("@todos_me", JSON.stringify(newTodos));
+        } else {
+          console.log("Data Not Found");
+          AsyncStorage.setItem("@todos_me", JSON.stringify(todo));
+        }
       });
+      getData();
     } else {
       Alert.alert("OOPS", "Todo must be over 3 characters long", [
         { text: "Understood", onPress: () => console.log("alert closed") },
