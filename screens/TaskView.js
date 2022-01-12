@@ -7,20 +7,25 @@ import {
   StyleSheet,
   Modal,
   SafeAreaView,
+  ScrollView,
+  Alert,
 } from "react-native";
-// import shortid from "shortid";
 import ProgressCircle from "react-native-progress-circle";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import styles2 from "../styles/screens/taskViewStyle";
 import appTheme from "../constants/colors";
-import { NavigationContainer } from "@react-navigation/native";
-import { getTaskDb } from "../db/demo";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+  getTaskDb,
+  addTaskDetails,
+  getTaskDetailsDb,
+  updateTaskDetailsDb,
+  deleteTaskDb,
+} from "../db/demo";
 import { EmptyListComponent } from "../components/EmptyListComponent";
 import { LinearGradient } from "expo-linear-gradient";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { combineData } from "../utils/DataHelper";
 
 export function TaskView({ navigation, ProjectId, route }) {
   const { taskId } = route.params;
@@ -28,7 +33,9 @@ export function TaskView({ navigation, ProjectId, route }) {
   const getData = async () => {
     try {
       const taskDb = await getTaskDb(taskId);
-      setTask(taskDb);
+      const taskDetailsDb = await getTaskDetailsDb(taskId);
+      setTask(combineData(taskDb, taskDetailsDb));
+      console.log(task);
     } catch (error) {
       console.log(error.message);
     }
@@ -37,29 +44,55 @@ export function TaskView({ navigation, ProjectId, route }) {
     getData();
   }, []);
 
-  // const selectedTask = {
-  //   id: 1,
-  //   projectId: 1,
-  //   title: "Dashboard Design",
-  //   members: [
-  //     {
-  //       name: "John Doe",
-  //       photo:
-  //         "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
-  //     },
-  //     {
-  //       name: "Ann Smith",
-  //       photo:
-  //         "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-  //     },
-  //     {
-  //       name: "Jeff Atwood",
-  //       photo:
-  //         "https://images.unsplash.com/photo-1558203728-00f45181dd84?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=753&q=80",
-  //     },
-  //   ],
-  //   progress: 15,
-  // };
+  const deleteTask = () => {
+    Alert.alert("Delete!", "Are You sure want to remove the task?", [
+      {
+        text: "Yes",
+        onPress: () => {
+          deleteTaskDb(taskId);
+        },
+      },
+      {
+        text: "No",
+        onPress: () => {},
+      },
+    ]);
+  };
+
+  // Time Picker Logic
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+  const [schedule, setSchedule] = useState();
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+
+    let tempDate = new Date(currentDate);
+    let fDate = tempDate;
+  };
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+
+  const showTimepicker = () => {
+    showMode("time");
+  };
+
+  const setTaskData = async () => {
+    await updateTaskDetailsDb({
+      taskId,
+      date: date.toString(),
+    });
+    getData();
+  };
 
   return (
     <Modal animationType="slide" transparent={true} visible={true}>
@@ -85,6 +118,12 @@ export function TaskView({ navigation, ProjectId, route }) {
                   </ProgressCircle>
                 </View>
                 <Text style={styles2.taskTitle}>{task?.title}</Text>
+                <TouchableOpacity
+                  style={styles.deleteBtn}
+                  onPress={() => deleteTask()}
+                >
+                  <AntDesign name="delete" size={24} color={appTheme.COLOR3} />
+                </TouchableOpacity>
               </View>
               <Text style={styles2.taskTeamText}>Team</Text>
               <View style={styles2.taskMembersWrapper}>
@@ -117,10 +156,41 @@ export function TaskView({ navigation, ProjectId, route }) {
                   <Text style={styles2.scheduleText}>June 13 2021</Text>
                 </View>
               </View>
-              <Text style={styles2.longText}>dsad</Text>
+              {/* <Text >{task?.description}</Text> */}
+              <View style={styles.teamSection}>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  <View style={styles.teamWrapper}>
+                    <Text>The Current scheduled Date: {task?.date}</Text>
+                    <TouchableOpacity
+                      onPress={showDatepicker}
+                      style={styles.btnWrapper}
+                    >
+                      <Text style={styles.btnText}>Schedule Date</Text>
+                    </TouchableOpacity>
+                    <View style={styles.datePicker}>
+                      {show && (
+                        <DateTimePicker
+                          testID="dateTimePicker"
+                          value={date}
+                          mode={mode}
+                          is24Hour={true}
+                          display="default"
+                          onChange={onChange}
+                        />
+                      )}
+                    </View>
 
+                    <TouchableOpacity
+                      onPress={showTimepicker}
+                      style={styles.btnWrapper}
+                    >
+                      <Text style={styles.btnText}>Schedule Time</Text>
+                    </TouchableOpacity>
+                  </View>
+                </ScrollView>
+              </View>
               <View style={[styles2.bottomWrapper]}>
-                <TouchableOpacity onPress={() => deleteTask()}>
+                <TouchableOpacity onPress={() => setTaskData()}>
                   <LinearGradient
                     colors={[
                       appTheme.GRADIENT_COLOR1,
@@ -128,7 +198,7 @@ export function TaskView({ navigation, ProjectId, route }) {
                     ]}
                     style={styles2.btnWrapper}
                   >
-                    <Text style={styles2.btnText}>Delete?</Text>
+                    <Text style={styles2.btnText}>Set schedule</Text>
                   </LinearGradient>
                 </TouchableOpacity>
               </View>
@@ -181,4 +251,34 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   }),
+  teamSection: { height: 300 },
+  teamWrapper: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  btnWrapper: {
+    height: 45,
+    backgroundColor: appTheme.PRIMARY_COLOR,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 35,
+    width: "70%",
+    borderRadius: 7,
+    marginBottom: 20,
+  },
+  btnText: {
+    color: "#fff",
+    fontSize: 16,
+  },
+  deleteBtn: {
+    marginLeft: 70,
+  },
+  datePicker: {
+    marginTop: 20,
+    marginLeft: 210,
+    width: "100%",
+    justifyContent: "center",
+  },
 });

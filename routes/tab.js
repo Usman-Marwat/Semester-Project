@@ -1,11 +1,7 @@
 import * as React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
-import { Profile } from "../screens/Profile";
+import { Octicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Dashboard } from "../screens/Dashboard";
-import { Projects } from "../screens/Projects";
 import ProjectsStack from "../routes/projectsStack";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import appTheme from "../constants/colors";
@@ -26,9 +22,9 @@ function MyTabs() {
         name="Dashboard"
         component={Dashboard}
         options={{
-          tabBarLabel: "Home",
+          tabBarLabel: "Dashboard",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
+            <MaterialIcons name="dashboard" size={24} color="black" />
           ),
         }}
       />
@@ -37,7 +33,7 @@ function MyTabs() {
         component={ProjectsStack}
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <Octicons name="project" size={26} color="black" />
           ),
         }}
       />

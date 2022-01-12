@@ -155,19 +155,6 @@ export const getTasksDb = async () => {
   return data;
 };
 
-export const getTaskDb = async (id) => {
-  const response = await fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`);
-  const data = await response.json();
-  for (let task in data) {
-    if (!data.hasOwnProperty(task)) {
-      continue;
-    }
-    if (data[task].id == id) {
-      return data[task];
-    }
-  }
-};
-
 export const addUser = (newUser) => {
   var requestOptions = {
     method: "POST",
@@ -212,4 +199,80 @@ export const updateUserDb = async (newUser) => {
     requestOptions
   );
   // const data = await response.json();
+};
+
+export const getTaskDb = async (id) => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/tasks.json`);
+  const data = await response.json();
+  for (let task in data) {
+    if (!data.hasOwnProperty(task)) {
+      continue;
+    }
+    if (data[task].id == id) {
+      return data[task];
+    }
+  }
+};
+
+export const addTaskDetails = async (details) => {
+  var requestOptions = {
+    method: "POST",
+    body: JSON.stringify(details),
+  };
+  const response = await fetch(
+    `${FIREBASE_API_ENDPOINT}/taskDetails.json`,
+    requestOptions
+  );
+  const data = await response.json();
+  console.log(data);
+};
+
+export const getTaskDetailsDb = async (taskId) => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/taskDetails.json`);
+  const data = await response.json();
+  for (let item in data) {
+    if (data[item].taskId == taskId) {
+      console.log("-------");
+      console.log(data[item]);
+      console.log("-------");
+      return data[item];
+    }
+  }
+};
+
+export const getTaskDetailsIdDb = async (taskId) => {
+  const response = await fetch(`${FIREBASE_API_ENDPOINT}/taskDetails.json`);
+  const data = await response.json();
+  for (let id in data) {
+    if (data[id].taskId == taskId) {
+      return id;
+    }
+  }
+};
+
+export const updateTaskDetailsDb = async (details) => {
+  const id = await getTaskDetailsIdDb(details.taskId);
+  // const id = "-Mt8sTI4PIkoXdx3M4aD";
+  var requestOptions = {
+    method: "PATCH",
+    body: JSON.stringify(details),
+  };
+  const response = await fetch(
+    `${FIREBASE_API_ENDPOINT}/taskDetails/${id}.json`,
+    requestOptions
+  );
+  // const data = await response.json();
+};
+
+export const deleteTaskDb = async (taskId) => {
+  const id = await getTaskDetailsIdDb(taskId);
+  console.log(id);
+  var requestOptions = {
+    method: "DELETE",
+  };
+  const response = await fetch(
+    `${FIREBASE_API_ENDPOINT}/tasks/${id}.json`,
+    requestOptions
+  );
+  const data = await response.json();
 };
