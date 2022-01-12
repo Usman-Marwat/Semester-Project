@@ -36,12 +36,18 @@ export function Profile({ navigation }) {
 
   const getData = async () => {
     const userDb = await getUserDb();
+    var base64Icon = `data:image/png;base64,${userDb.photo}`;
+    userDb.photo = base64Icon;
     setUser(combineData(user, userDb));
   };
 
   const updateHandler = async (newUser) => {
     updateUserDb(newUser);
     await getData();
+    setModalVisible(!modalVisible);
+  };
+
+  const showUpdateModal = () => {
     setModalVisible(!modalVisible);
   };
 
@@ -83,7 +89,7 @@ export function Profile({ navigation }) {
             <View style={styles.profileCenterSection}>
               <Text style={styles.nameText}>{user?.username}</Text>
               <Text style={styles.designationText}>{user?.designation}</Text>
-              <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+              <TouchableOpacity onPress={() => showUpdateModal()}>
                 <LinearGradient
                   colors={[appTheme.GRADIENT_COLOR1, appTheme.GRADIENT_COLOR2]}
                   style={styles.editProfileWrapper}

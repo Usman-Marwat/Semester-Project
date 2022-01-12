@@ -5,11 +5,6 @@ import TodoItem from "../components/todoItem";
 import AddTodo from "../components/addTodo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-//  { text: "play on the switch", key: "4" },
-//     { text: "buy coffee", key: "1" },
-//     { text: "create an app", key: "2" },
-//     { text: "play on the switch again", key: "3" },
-
 export default function Todos({ navigation }) {
   const [todos, setTodos] = useState([]);
   const [toggleBtns, setToggleBtns] = useState(false);

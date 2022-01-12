@@ -201,14 +201,15 @@ export const getUserDb = async () => {
   }
 };
 
-export const updateUserDb = (newUser) => {
+export const updateUserDb = async (newUser) => {
   const id = "-Mt8sTI4PIkoXdx3M4aD";
   var requestOptions = {
     method: "PATCH",
     body: JSON.stringify(newUser),
   };
-  fetch(`${FIREBASE_API_ENDPOINT}/users/${id}.json`, requestOptions)
-    .then((response) => response.json())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
+  const response = await fetch(
+    `${FIREBASE_API_ENDPOINT}/users/${id}.json`,
+    requestOptions
+  );
+  // const data = await response.json();
 };

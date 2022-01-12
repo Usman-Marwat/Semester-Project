@@ -15,6 +15,7 @@ import { combineData } from "../utils/DataHelper";
 import { LinearGradient } from "expo-linear-gradient";
 import appTheme from "../constants/colors";
 import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
 import { Feather } from "@expo/vector-icons";
 
 export function UpdateProfile({
@@ -26,7 +27,11 @@ export function UpdateProfile({
 }) {
   const [image, setImage] = useState(null);
   const [data, setData] = useState({
-    newUser: { username: "", designation: "", photo: "" },
+    newUser: {
+      username: user.username,
+      designation: user.designation,
+      photo: "",
+    },
   });
 
   const handleSetValue = (field, value) => {
@@ -43,13 +48,15 @@ export function UpdateProfile({
       aspect: [4, 3],
       quality: 1,
     });
+    console.log(result);
     const photo = await FileSystem.readAsStringAsync(result.uri, {
       encoding: "base64",
     });
+    console.log(photo);
     if (!result.cancelled) {
       setImage(result.uri);
     }
-    return photo;
+    handleSetValue("photo", photo);
   };
 
   return (
@@ -66,12 +73,14 @@ export function UpdateProfile({
               placeholder="UserName"
               placeholderTextColor="gray"
               style={styles2.textInput}
+              value={data.newUser.username}
               onChangeText={(text) => handleSetValue("username", text)}
             />
             <TextInput
               placeholder="Designation"
               placeholderTextColor="gray"
               style={styles2.textInput}
+              value={data.newUser.designation}
               onChangeText={(text) => handleSetValue("designation", text)}
             />
             <View style={styles2.teamTextWrapper}>
@@ -81,7 +90,7 @@ export function UpdateProfile({
               <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.teamWrapper}>
                   <TouchableOpacity
-                    onPress={() => handleSetValue("photo", pickImage())}
+                    onPress={() => pickImage()}
                     style={styles.btnWrapper}
                   >
                     <Feather name="image" size={24} color="black" />
