@@ -253,6 +253,11 @@ export const getTaskDetailsIdDb = async (taskId) => {
 export const updateTaskDetailsDb = async (details) => {
   const id = await getTaskDetailsIdDb(details.taskId);
   // const id = "-Mt8sTI4PIkoXdx3M4aD";
+  if (!id) {
+    await addTaskDetails(details);
+    return;
+  }
+
   var requestOptions = {
     method: "PATCH",
     body: JSON.stringify(details),
